@@ -1,0 +1,36 @@
+name: Warflix Autonomous AI Agent
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # يشتغل تلقائياً كل يوم الساعة 12 منتصف الليل
+  workflow_dispatch: # يسمح لك بتشغيله يدوياً بضغطة زر في أي وقت للتجربة
+
+jobs:
+  update-intelligence:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Gemini Strategic Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python agent.py
+
+      - name: Commit and Push new chapters
+        run: |
+          git config --global user.name "Warflix AI Agent"
+          git config --global user.email "agent@warflix.ai"
+          git add updates.json
+          git diff --staged --quiet || git commit -m "Auto-update strategic chapters"
+          git push
