@@ -5,7 +5,6 @@ from datetime import datetime
 from google import genai
 from google.genai import types
 
-# 1. سحب أحدث الأخبار من الوكالات العالمية (رويترز، الجزيرة، BBC)
 RSS_FEEDS = [
     "https://feeds.bbci.co.uk/arabic/rss.xml",
     "https://www.aljazeera.net/aljazeerarss/a7c186be-1baa-4bd4-9d80-a84db769f779/73d0e1b4-532f-45ef-b135-bfdff8b8cab9"
@@ -19,15 +18,41 @@ def fetch_latest_news():
             news_items.append(f"- {entry.title}: {entry.get('summary', '')}")
     return "\n".join(news_items)
 
+def get_working_model(client):
+    # قائمة بأحدث موديلات جوجل بالترتيب + سحب تلقائي من حسابك
+    preferred = [
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-preview-05-20",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash"
+    ]
+    try:
+        available = [m.name.replace("models/", "") for m in client.models.list() if "gemini" in m.name]
+        print("Available models for your key:", available)
+        for p in preferred:
+            if p in available:
+                return p
+        # اختيار أول موديل فلاش متاح في حسابك تلقائياً
+        for m in available:
+            if "flash" in m and "vision" not in m:
+                return m
+        if available:
+            return available[0]
+    except Exception as e:
+        print("Model list notice:", e)
+    return "gemini-2.0-flash"
+
 def update_encyclopedia():
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("Missing GEMINI_API_KEY")
 
     client = genai.Client(api_key=api_key)
+    model_name = get_working_model(client)
+    print(f"Using auto-selected model: {model_name}")
+
     latest_news = fetch_latest_news()
 
-    # قراءة سجل التحديثات الحالية (أو إنشاؤه لو مش موجود)
     db_file = "updates.json"
     if os.path.exists(db_file):
         with open(db_file, "r", encoding="utf-8") as f:
@@ -52,7 +77,7 @@ def update_encyclopedia():
     """
 
     response = client.models.generate_content(
-        model="gemini-3.0-flash",
+        model=model_name,
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
@@ -67,7 +92,6 @@ def update_encyclopedia():
         ch["date"] = today_str
         current_data["live_briefings"].insert(0, ch)
 
-    # الاحتفاظ بآخر 30 فصلاً محدثاً تلقائياً
     current_data["live_briefings"] = current_data["live_briefings"][:30]
     current_data["last_updated"] = today_str
 
