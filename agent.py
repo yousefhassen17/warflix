@@ -18,29 +18,45 @@ def fetch_latest_news():
             news_items.append(f"- {entry.title}: {entry.get('summary', '')}")
     return "\n".join(news_items)
 
-def get_working_model(client):
-    # قائمة بأحدث موديلات جوجل بالترتيب + سحب تلقائي من حسابك
-    preferred = [
+def generate_with_fallback(client, prompt):
+    # سحب كل الموديلات المتاحة في حسابك واستبعاد الموديلات الموقوفة للحسابات الجديدة
+    candidate_models = [
         "gemini-3-flash-preview",
-        "gemini-2.5-flash-preview-05-20",
-        "gemini-2.0-flash",
-        "gemini-1.5-flash"
+        "gemini-3.0-flash",
+        "gemini-3.0-pro",
+        "gemini-2.5-pro"
     ]
+    
     try:
-        available = [m.name.replace("models/", "") for m in client.models.list() if "gemini" in m.name]
-        print("Available models for your key:", available)
-        for p in preferred:
-            if p in available:
-                return p
-        # اختيار أول موديل فلاش متاح في حسابك تلقائياً
-        for m in available:
-            if "flash" in m and "vision" not in m:
-                return m
-        if available:
-            return available[0]
+        for m in client.models.list():
+            name = m.name.replace("models/", "")
+            # استبعاد أي موديل 2.5-flash أو 1.5 أو موديلات الصور والصوت
+            if "gemini" in name and "2.5-flash" not in name and "1.5" not in name and "2.0" not in name:
+                if not any(x in name for x in ["vision", "embedding", "imagen", "veo", "audio", "tts"]):
+                    if name not in candidate_models:
+                        candidate_models.append(name)
     except Exception as e:
-        print("Model list notice:", e)
-    return "gemini-2.0-flash"
+        print("Notice listing models:", e)
+
+    last_error = None
+    for model_name in candidate_models:
+        try:
+            print(f"Trying model: {model_name} ...")
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    temperature=0.3
+                )
+            )
+            print(f"Success with model: {model_name}!")
+            return response
+        except Exception as e:
+            print(f"Model {model_name} failed, trying next... Reason: {e}")
+            last_error = e
+
+    raise last_error
 
 def update_encyclopedia():
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -48,9 +64,6 @@ def update_encyclopedia():
         raise ValueError("Missing GEMINI_API_KEY")
 
     client = genai.Client(api_key=api_key)
-    model_name = get_working_model(client)
-    print(f"Using auto-selected model: {model_name}")
-
     latest_news = fetch_latest_news()
 
     db_file = "updates.json"
@@ -76,15 +89,7 @@ def update_encyclopedia():
        - full_html_analysis (التحليل المفصل مقسماً بعناوين <h4> وفقرات <p> ونقاط <ul>)
     """
 
-    response = client.models.generate_content(
-        model=model_name,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            temperature=0.3
-        )
-    )
-
+    response = generate_with_fallback(client, prompt)
     result = json.loads(response.text)
     today_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
