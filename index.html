@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARFLIX | الموسوعة الاستراتيجية والجيوسياسية المعمقة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --netflix-red: #E50914;
+            --bg-dark: #0a0a0a;
+            --card-dark: #141414;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f3f4f6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .prose-strategic {
+            font-family: 'Cairo', sans-serif;
+            line-height: 2.2;
+            letter-spacing: 0.01em;
+        }
+        .prose-strategic p {
+            margin-bottom: 1.65rem;
+            text-align: justify;
+            color: #d1d5db;
+        }
+        .prose-strategic h4 {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.35rem;
+            margin-top: 2.6rem;
+            margin-bottom: 1.1rem;
+            padding-right: 0.85rem;
+            border-right: 4px solid #E50914;
+        }
+        .prose-strategic ul {
+            margin-bottom: 1.75rem;
+            padding-right: 1.25rem;
+        }
+        .prose-strategic li {
+            margin-bottom: 0.95rem;
+            position: relative;
+            padding-right: 1.3rem;
+            color: #d1d5db;
+            line-height: 2.05;
+        }
+        .prose-strategic li::before {
+            content: "▪";
+            color: #E50914;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        .quote-box {
+            background: linear-gradient(90deg, rgba(229,9,20,0.05) 0%, rgba(229,9,20,0.16) 100%);
+            border-right: 4px solid #E50914;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem 0 0 0.5rem;
+            font-style: italic;
+            color: #f9fafb;
+        }
+        .tactical-box {
+            background-color: #12151c;
+            border: 1px solid #262b38;
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            margin: 2.2rem 0;
+        }
+        .dossier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.75rem 0;
+            font-size: 0.9rem;
+            background-color: #111318;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #27272a;
+        }
+        .dossier-table th {
+            background-color: #18181b;
+            color: #f87171;
+            font-weight: 800;
+            text-align: right;
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid #27272a;
+        }
+        .dossier-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #1f2937;
+            color: #e5e7eb;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E50914;
+        }
+        .chapter-active {
+            border-color: #E50914 !important;
+            background: linear-gradient(135deg, rgba(229,9,20,0.22) 0%, rgba(20,20,20,0.95) 100%) !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-zinc-800/80 px-4 md:px-10 py-3.5 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+            <button onclick="showHome()" class="flex items-center gap-2.5 text-left group">
+                <span class="text-2xl md:text-3xl font-black tracking-tighter text-red-600 group-hover:scale-105 transition">WARFLIX</span>
+                <span class="text-[11px] bg-zinc-800 text-zinc-300 px-2.5 py-0.5 rounded font-bold border border-zinc-700">الموسوعة الاستراتيجية الكاملة</span>
+            </button>
+            <nav class="hidden lg:flex items-center gap-5 text-sm font-bold text-zinc-300">
+                <button onclick="showHome()" class="hover:text-white transition">الرئيسية</button>
+                <button onclick="openConflict('ukraine')" class="hover:text-red-500 transition">الحرب الروسية الأوكرانية</button>
+                <button onclick="openConflict('gaza')" class="hover:text-red-500 transition">حرب غزة والشرق الأوسط</button>
+                <button onclick="openConflict('sudan')" class="hover:text-red-500 transition">حرب السودان والذهب</button>
+                <button onclick="toggleGlossary()" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1">
+                    <span>📖 قاموس "زيرو استراتيجي"</span>
+                </button>
+            </nav>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <input id="searchInput" oninput="handleSearch(this.value)" type="text" placeholder="ابحث عن سلاح، معركة، مصطلح..." 
+                    class="bg-zinc-900/90 border border-zinc-700 text-xs md:text-sm rounded-full px-4 py-1.5 w-44 md:w-64 focus:outline-none focus:border-red-600 text-white">
+            </div>
+            <button onclick="toggleTextOnlyMode()" id="visualToggleBtn" class="text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-3.5 py-1.5 rounded-full border border-zinc-700 font-bold transition">
+                وضع القراءة الصافي (إخفاء الصور)
+            </button>
+        </div>
+    </header>
+
+    <!-- HOME VIEW -->
+    <main id="homeView" class="flex-1">
+        <!-- Hero Banner -->
+        <section class="relative min-h-[72vh] flex items-end pb-14 px-6 md:px-16 overflow-hidden">
+            <div class="absolute inset-0 z-0 visual-element">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Destroyed_Russian_tank_in_Bucha%2C_Kyiv_Oblast.jpg/1280px-Destroyed_Russian_tank_in_Bucha%2C_Kyiv_Oblast.jpg" 
+                     alt="Strategic Background" class="w-full h-full object-cover object-center opacity-35 scale-105"
+                     onerror="this.style.display='none'">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/65 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl space-y-5 pt-16">
+                <div class="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/40 text-red-400 px-3.5 py-1 rounded-full text-xs font-bold">
+                    <span>دراسات استراتيجية موسوعية • مصممة لتأخذك من الصفر إلى مستوى الخبير العسكري</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-white">
+                    اقرأ الحروب المعاصرة بالتفصيل الكامل كما تُدرّس في الأكاديميات العسكرية
+                </h1>
+                <p class="text-zinc-300 text-base md:text-lg leading-relaxed max-w-3xl">
+                    وداعاً للملخصات السطحية. كل ملف هنا مقسم إلى 4 فصول طويلة ومفصلة للغاية تغطي: الجذور الجغرافية والتاريخية، العقائد العسكرية، تشريح المعارك بالساعة والتاريخ، فيزياء الأسلحة وتكلفتها، سلاسل الإمداد، وحروب الاقتصاد والعملات.
+                </p>
+                <div class="flex flex-wrap gap-3.5 pt-2">
+                    <button onclick="openConflict('ukraine')" class="bg-red-600 hover:bg-red-700 text-white font-black px-7 py-3.5 rounded-lg flex items-center gap-2 shadow-lg shadow-red-600/30 transition transform hover:-translate-y-0.5">
+                        <span>▶ ابدأ قراءة ملف روسيا وأوكرانيا (4 فصول كاملة)</span>
+                    </button>
+                    <button onclick="openConflict('gaza')" class="bg-zinc-800/90 hover:bg-zinc-700 text-white font-bold px-6 py-3.5 rounded-lg border border-zinc-700 transition">
+                        <span>ملف حرب غزة والشرق الأوسط</span>
+                    </button>
+                    <button onclick="openConflict('sudan')" class="bg-zinc-800/90 hover:bg-zinc-700 text-white font-bold px-6 py-3.5 rounded-lg border border-zinc-700 transition">
+                        <span>ملف حرب السودان والذهب</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conflicts Grid -->
+        <section class="px-6 md:px-16 py-10 space-y-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white">الملفات الاستراتيجية الكاملة (اختر حرباً لفتح الفصول الموسوعية)</h2>
+                    <p class="text-sm text-zinc-400 mt-1">كل فصل مكتوب باستفاضة كاملة مع خرائط وصور أرشيفية موثقة من المصادر المفتوحة وروابط وثائقيات يوتيوب</p>
+                </div>
+                <div class="flex items-center gap-2 text-xs bg-zinc-900 border border-zinc-800 px-3.5 py-2 rounded-lg">
+                    <span class="text-zinc-400">إجمالي المحتوى:</span>
+                    <span class="text-red-400 font-black">12 فصلاً موسوعياً طويلاً</span>
+                </div>
+            </div>
+
+            <div id="conflictCardsContainer" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Direct 12 Chapters Quick Access Grid -->
+            <div class="pt-8 border-t border-zinc-800/80">
+                <h3 class="text-xl font-black text-white mb-4 flex items-center gap-2">
+                    <span class="w-1.5 h-6 bg-red-600 rounded-full inline-block"></span>
+                    <span>الوصول السريع لجميع الفصول الـ 12 (اضغط على أي فصل لفتحه مباشرة):</span>
+                </h3>
+                <div id="allChaptersQuickGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- READER / CONFLICT DETAIL VIEW -->
+    <main id="readerView" class="hidden flex-1 px-4 md:px-12 py-8 max-w-7xl mx-auto w-full">
+        <!-- Sticky Reader Toolbar -->
+        <div class="sticky top-16 z-40 bg-zinc-950/95 backdrop-blur border border-zinc-800 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-4 mb-6 shadow-xl">
+            <button onclick="showHome()" class="inline-flex items-center gap-2 text-xs md:text-sm bg-zinc-900 hover:bg-red-600 text-zinc-200 hover:text-white px-4 py-2 rounded-lg border border-zinc-700 font-bold transition">
+                <span>→ العودة لقائمة الحروب الرئيسية</span>
+            </button>
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="text-xs text-zinc-400">حجم خط القراءة:</span>
+                <button onclick="adjustFontSize(-1)" class="bg-zinc-800 hover:bg-zinc-700 px-3 py-1 rounded text-sm font-black text-white">A-</button>
+                <button onclick="adjustFontSize(1)" class="bg-zinc-800 hover:bg-zinc-700 px-3 py-1 rounded text-sm font-black text-white">A+</button>
+                <button onclick="toggleGlossary()" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 px-3 py-1 rounded text-xs font-bold">
+                    📖 قاموس المصطلحات
+                </button>
+            </div>
+        </div>
+
+        <!-- Conflict Header Banner -->
+        <div id="conflictHeader" class="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-6 md:p-8 mb-8">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Chapters Layout: Sidebar + Deep Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Chapters Selector Sidebar -->
+            <aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-32">
+                <div class="bg-zinc-900/90 border border-zinc-800 rounded-xl p-4">
+                    <h3 class="text-base font-extrabold text-white mb-1 flex items-center justify-between">
+                        <span>فصول الدراسة الاستراتيجية</span>
+                        <span class="text-xs bg-red-600/20 text-red-400 px-2.5 py-0.5 rounded font-bold">4 فصول موسوعية</span>
+                    </h3>
+                    <p class="text-xs text-zinc-400 mb-4">اضغط للتنقل بين الفصول الأربعة:</p>
+                    <div id="chaptersList" class="space-y-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Quick Key Metrics Box -->
+                <div id="conflictMetricsBox" class="bg-zinc-900/90 border border-zinc-800 rounded-xl p-5 space-y-3">
+                    <!-- Populated by JS -->
+                </div>
+            </aside>
+
+            <!-- Active Chapter Full Content -->
+            <article class="lg:col-span-8 bg-zinc-900/60 border border-zinc-800/90 rounded-2xl p-6 md:p-10 shadow-2xl">
+                <div id="chapterContentArea">
+                    <!-- Populated by JS -->
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- GLOSSARY MODAL -->
+    <div id="glossaryModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="toggleGlossary()">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+            <div class="p-5 border-b border-zinc-800 flex items-center justify-between">
+                <h3 class="text-xl font-black text-amber-400">📖 قاموس "زيرو استراتيجي" للمصطلحات العسكرية والسياسية</h3>
+                <button onclick="toggleGlossary()" class="bg-zinc-800 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-bold">إغلاق ✕</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-sm leading-relaxed">
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">حرب الاستنزاف (War of Attrition)</h4>
+                    <p class="text-zinc-300">إستراتيجية عسكرية لا تهدف إلى تحقيق نصر خاطف، بل تهدف إلى إضعاف العدو تدريجياً وبشكل مستمر عبر استهلاك موارده البشرية، وذخيرته، واقتصاده، وروحه المعنوية حتى ينهار من الداخل أو يعجز عن الاستمرار في القتال.</p>
+                </div>
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">العمق الاستراتيجي (Strategic Depth)</h4>
+                    <p class="text-zinc-300">المسافة الجغرافية التي تفصل بين خطوط القتال الأمامية وبين المراكز الحيوية للدولة (مثل العاصمة، المصانع الكبرى، والقواعد الرئيسية). كلما زاد العمق الاستراتيجي، استطاعت الدولة امتصاص الضربات الأولى والتراجع لإعادة تنظيم صفوفها دون أن تسقط.</p>
+                </div>
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">الحرب غير المتماثلة (Asymmetric Warfare)</h4>
+                    <p class="text-zinc-300">حرب تدور بين طرفين غير متكافئين إطلاقاً في القوة العسكرية التقليدية (مثل جيش نظامي يمتلك طيراناً ودبابات مقابل جماعة مسلحة أو مقاومة تعتمد على الأنفاق، الكمائن، والمسيرات الرخيصة). يحاول الطرف الأضعف فيها تحييد تكنولوجيا الطرف الأقوى عبر حرب العصابات واستغلال الجغرافيا الحضرية.</p>
+                </div>
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">منطقة تحريم جوي / منع الوصول (A2/AD)</h4>
+                    <p class="text-zinc-300">اختصار لـ Anti-Access/Area Denial، وهي شبكة معقدة من أنظمة الدفاع الجوي والصواريخ المضادة للسفن والرادارات التي ينصبها جيش ما لمنع العدو من دخول منطقة جغرافية معينة أو التحليق فوقها بحرية.</p>
+                </div>
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">الهجوم السقفي (Top-Attack Mode)</h4>
+                    <p class="text-zinc-300">تقنية تتبعها الصواريخ الحديثة المضادة للدروع (مثل جافلين الأمريكي) والمسيرات الانتحارية، حيث يرتفع الصاروخ للأعلى ثم ينقض عمودياً على سقف برج الدبابة، لأن سقف الدبابة هو أضعف وأرق منطقة في تدريعها مقارنة بمقدمتها المصفحة بسمك كبير.</p>
+                </div>
+                <div class="p-4 bg-zinc-800/60 rounded-lg border border-zinc-700">
+                    <h4 class="font-bold text-white text-base mb-1">نظام سويفت (SWIFT)</h4>
+                    <p class="text-zinc-300">الشبكة العالمية للاتصالات المالية بين البنوك. فصل أي دولة عن هذا النظام يعني عزل بنوكها عن إرسال أو استقبال الأموال بالدولار واليورو مع العالم الخارجي، وهو ما يُعرف بـ "القنبلة النووية المالية".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentConflictId = 'ukraine';
+        let currentChapterIndex = 0;
+        let currentFontSize = 18;
+        let textOnlyMode = false;
+
+        const CONFLICTS_DATA = {
+            ukraine: {
+                id: 'ukraine',
+                title: 'الحرب الروسية الأوكرانية: صراع الإمبراطورية وحلف الناتو',
+                subtitle: 'كيف تحولت "عملية عسكرية خاطفة" مدتها 72 ساعة إلى أكبر حرب خنادق واستنزاف صناعي وتكنولوجي في أوروبا منذ الحرب العالمية الثانية.',
+                region: 'أوروبا الشرقية / أوراسيا',
+                startDate: '2014 (ضم القرم) - 24 فبراير 2022 (الغزو الشامل)',
+                coverImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Destroyed_Russian_tank_in_Bucha%2C_Kyiv_Oblast.jpg/1024px-Destroyed_Russian_tank_in_Bucha%2C_Kyiv_Oblast.jpg',
+                metrics: [
+                    { label: 'طول خط الجبهة النشط', value: 'أكثر من 1,000 كيلومتر' },
+                    { label: 'معدل استهلاك القذائف المدفعية يومياً', value: '10,000 - 30,000 قذيفة' },
+                    { label: 'حجم المساعدات الغربية لأوكرانيا', value: 'تجاوز 250 مليار دولار' },
+                    { label: 'الأصول الروسية المجمدة غربياً', value: 'حوالي 300 مليار دولار' }
+                ],
+                chapters: [
+                    {
+                        number: 1,
+                        title: 'الفصل الأول: الجذور الجيوسياسية وعقيدة "العمق الاستراتيجي" الروسي',
+                        readingTime: '18 دقيقة قراءة معمقة',
+                        summary: 'لماذا تعتبر موسكو انضمام أوكرانيا للناتو تهديداً وجودياً لبقاء الدولة الروسية؟ شرح جغرافية السهل الأوروبي، وعود التسعينيات، وثورة الميدان 2014.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Europe_topography_map_en.png/800px-Europe_topography_map_en.png',
+                                caption: 'خريطة طبوغرافية لأوروبا توضح "السهل الأوروبي الشمالي" باللون الأخضر الممتد من فرنسا وبولندا وأوكرانيا حتى موسكو بدون أي حواجز جبلية طبيعية.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/History_of_NATO_enlargement.svg/800px-History_of_NATO_enlargement.svg.png',
+                                caption: 'خريطة تاريخية توضح مراحل توسع حلف شمال الأطلسي (الناتو) شرقاً نحو الحدود الروسية منذ عام 1990 وحتى اليوم.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'وثائقي الجزيرة: الجذور التاريخية والجيوسياسية للأزمة الأوكرانية', url: 'https://www.youtube.com/results?search_query=وثائقي+روسيا+واوكرانيا+الجذور+التاريخية' },
+                            { title: 'تحليل خرائط: لماذا تغزو روسيا أوكرانيا؟ (الجغرافيا السياسية)', url: 'https://www.youtube.com/results?search_query=لماذا+تغزو+روسيا+أوكرانيا+جغرافيا' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: لعنة الجغرافيا ولغز "السهل الأوروبي الشمالي"</h4>
+                            <p>لكي تفهم أي حرب في التاريخ، القاعدة الأولى في العلوم الاستراتيجية هي: <strong>"افتح الخريطة قبل أن تقرأ تصريحات السياسيين"</strong>. السياسيون يتغيرون، والأيديولوجيات تسقط (سقطت روسيا القيصرية، ثم سقط الاتحاد السوفيتي، وجاءت روسيا الاتحادية)، لكن الجغرافيا ثابتة لا تتغير. عندما ينظر قادة الجيش والمخابرات الروسية في الكرملين إلى خريطة غرب روسيا، فإنهم يرون كابوساً جغرافياً يُعرف باسم <strong>"السهل الأوروبي الشمالي" (North European Plain)</strong>.</p>
+                            <p>هذا السهل هو عبارة عن أرض منبسطة تماماً تبدأ من شمال فرنسا وبلجيكا وألمانيا، وتمر عبر بولندا بممر ضيق نسبياً (عرضه حوالي 300 كم فقط)، ثم تتسع فجأة كالمثلث المفتوح عندما تدخل أراضي أوكرانيا وبيلاروسيا ليصل عرض الجبهة إلى أكثر من 2,000 كيلومتر وصولاً إلى أبواب العاصمة موسكو. المشكلة الاستراتيجية هنا هي أنه <strong>لا توجد أي جبال، ولا صحاري، ولا عوائق طبيعية كبرى</strong> يمكن للجيش الروسي أن يحتمي خلفها لصد أي غزو بري قادم من الغرب. على مدار القرون الثلاثة الماضية، غُزيت روسيا عبر هذا السهل المفتوح أربع مرات كبرى: السويديون عام 1708، نابليون بونابرت عام 1812، ألمانيا القيصرية في الحرب العالمية الأولى عام 1914، وأخيراً ألمانيا النازية بقيادة هتلر في عملية "بارباروسا" عام 1941 والتي كلفت الاتحاد السوفيتي قرابة 27 مليون قتيل.</p>
+                            <p>لذلك، تأسست العقيدة العسكرية الروسية (سواء أيام القياصرة أو السوفييت أو بوتين) على مبدأ واحد لا يقبل التفاوض: <strong>"الأمن عبر المسافة" أو ما يُعرف بـ "العمق الاستراتيجي"</strong>. طالما أن روسيا لا تملك جبالاً تحمي موسكو، فإنها يجب أن تسيطر سياسياً أو عسكرياً على الدول العازلة التي تقع بينها وبين القوى الغربية، وعلى رأس هذه الدول تأتي <strong>أوكرانيا</strong>.</p>
+
+                            <div class="quote-box">
+                                "بدون أوكرانيا، تتوقف روسيا عن كونها إمبراطورية عظمى في أوراسيا، وتتحول إلى دولة إقليمية آسيوية محاصرة." — زبيغنيو بريجينسكي، مستشار الأمن القومي الأمريكي الأسبق في كتابه الشهير (رقعة الشطرنج الكبرى).
+                            </div>
+
+                            <h4>ثانياً: لماذا تُمثل أوكرانيا تحديداً "الخط الأحمر" الأخطر لموسكو؟</h4>
+                            <p>أوكرانيا ليست مجرد دولة مجاورة لروسيا، بل هي ثاني أكبر دولة في أوروبا من حيث المساحة بعد روسيا نفسها، وتشترك مع روسيا في حدود برية شاسعة يبلغ طولها حوالي 2,300 كيلومتر. من الناحية العسكرية البحتة، المسافة بين الحدود الشمالية الشرقية لأوكرانيا (مناطق خاركيف وسومي) وبين العاصمة الروسية موسكو لا تتجاوز <strong>450 إلى 500 كيلومتر</strong> من الأراضي المنبسطة السهلة للآليات المدرعة.</p>
+                            <p>والأخطر من ذلك هو الجنوب الروسي؛ فمنطقة "فولغوغراد" (ستالينغراد سابقاً) التي تمر عبرها أنابيب النفط والغاز وطرق التجارة الروسية القادمة من بحر قزوين والقوقاز، تبعد أقل من 350 كيلومتراً عن الحدود الأوكرانية الشرقية. في الحسابات العسكرية الروسية، إذا انضمت أوكرانيا إلى حلف شمال الأطلسي (الناتو)، فهذا يعني أن:</p>
+                            <ul>
+                                <li><strong>زمن تحليق الصواريخ الفرط صوتية أو الباليستية:</strong> إذا تم نصب منصات صواريخ أمريكية في شرق أوكرانيا، فإن زمن وصول الصاروخ إلى مراكز القيادة والسيطرة في موسكو سيتقلص إلى أقل من 5 إلى 7 دقائق فقط، وهو وقت لا يكفي حتى لاتخاذ قرار الرد النووي أو إخلاء القيادة.</li>
+                                <li><strong>خنق الأسطول الروسي في البحر الأسود:</strong> شبه جزيرة القرم (التي تضم قاعدة سيفاستوبول البحرية التاريخية التي أسستها الإمبراطورة كاثرين العظيمة عام 1783) هي المنفذ الوحيد لروسيا نحو المياه الدافئة والبحر الأبيض المتوسط والشرق الأوسط. لو أصبحت أوكرانيا عضواً في الناتو مع سيطرتها على القرم، فسيتم طرد الأسطول الروسي بالكامل وتحويل البحر الأسود إلى "بحيرة أطلسية".</li>
+                                <li><strong>القطيعة التاريخية والثقافية:</strong> ينظر القوميون الروس إلى العاصمة الأوكرانية "كييف" على أنها "أم المدن الروسية" ومهد دولة "كييف روس" في القرن التاسع الميلادي التي نشأت منها الحضارة السلافية الشرقية والكنيسة الأرثوذكسية.</li>
+                            </ul>
+
+                            <h4>ثالثاً: التسلسل التاريخي للأزمة من تفكك الاتحاد السوفيتي (1991) إلى انفجار 2014</h4>
+                            <p>عندما انهار الاتحاد السوفيتي عام 1991، أصبحت أوكرانيا دولة مستقلة، وكان يوجد على أراضيها ثالث أكبر ترسانة نووية في العالم (حوالي 1,700 رأس نووي سوفيتي وقاذفات استراتيجية). في عام 1994، تم توقيع <strong>"مذكرة بودابست"</strong>، والتي وافقت بموجبها أوكرانيا على تسليم جميع أسلحتها النووية لروسيا لتفكيكها، مقابل تعهد كل من (روسيا، الولايات المتحدة، وبريطانيا) باحترام استقلال أوكرانيا وسيادتها وحدودها وعدم استخدام القوة العسكرية أو الضغوط الاقتصادية ضدها.</p>
+                            <p>لكن التوتر بدأ يتصاعد تدريجياً بسبب توسع حلف الناتو شرقاً. يقول الروس إن وزير الخارجية الأمريكي جيمس بيكر وعد الرئيس السوفيتي ميخائيل غورباتشوف شفهياً عام 1990 بأن الناتو "لن يتوسع إنشاً واحداً نحو الشرق" بعد توحيد ألمانيا. إلا أن هذا الوعد لم يُكتب في معاهدة رسمية ملزمة. ومع ضعف روسيا الاقتصادي في التسعينيات، توسع الناتو على عدة موجات متتالية:</p>
+                            <ul>
+                                <li><strong>موجة 1999:</strong> انضمام بولندا، المجر، والتشيك.</li>
+                                <li><strong>موجة 2004 (الصدمة الكبرى لموسكو):</strong> انضمام 7 دول دفعة واحدة، منها دول البلطيق الثلاث (إستونيا، لاتفيا، ليتوانيا) التي كانت جمهوريات سوفيتية سابقة ولها حدود مباشرة مع روسيا، بالإضافة إلى رومانيا وبلغاريا على البحر الأسود.</li>
+                                <li><strong>قمة بوخارست (أبريل 2008) — نقطة اللاعودة:</strong> أعلن حلف الناتو رسمياً في بيانه الختامي أن <strong>"أوكرانيا وجورجيا ستصبحان عضوين في حلف الناتو في المستقبل"</strong>. اعتبر الرئيس الروسي فلاديمير بوتين هذا الإعلان بمثابة إعلان حرب مؤجل، وبعدها بأربعة أشهر فقط (أغسطس 2008)، تدخل الجيش الروسي عسكرياً في جورجيا في حرب دامت 5 أيام لمنعها من دخول الحلف.</li>
+                            </ul>
+
+                            <h4>رابعاً: زلزال عام 2014 — ثورة الميدان، ضم القرم، وحرب الدونباس الأولى</h4>
+                            <p>في أواخر عام 2013، كان الرئيس الأوكراني المنتخب حينها هو "فيكتور يانوكوفيتش"، وهو سياسي يميل للتقارب مع موسكو. كان من المفترض أن يوقع يانوكوفيتش "اتفاقية الشراكة الاقتصادية والسياسية" مع الاتحاد الأوروبي، وهي خطوة كان الأوكرانيون يرونها بوابة للخروج من العباءة الروسية. في اللحظة الأخيرة، وتحت ضغط اقتصادي روسي هائل وعرض قرض روسي بقيمة 15 مليار دولار وتخفيض أسعار الغاز، رفض يانوكوفيتش توقيع الاتفاقية مع أوروبا.</p>
+                            <p>انفجر الشارع الأوكراني في العاصمة كييف فيما عُرف بـ <strong>"ثورة الميدان الأوروبي" (Euromaidan)</strong>. وبعد أشهر من الاشتباكات الدامية في شتاء فبراير 2014، فرّ يانوكوفيتش إلى روسيا، وتشكلت في كييف حكومة جديدة موالية للغرب تماماً. أدرك بوتين أن أوكرانيا أفلتت سياسياً للأبد، فقرر الانتقال فوراً من الأدوات السياسية إلى القوة العسكرية الخشنة:</p>
+                            <ul>
+                                <li><strong>فبراير - مارس 2014 (عملية "الرجال الخضر الصغار"):</strong> ظهرت قوات خاصة روسية بملابس عسكرية حديثة بدون شارات أو أعلام رسمية، وسيطرت في أيام معدودة ودون قتال يُذكر على البرلمان والقواعد العسكرية في <strong>شبه جزيرة القرم</strong>، ثم أُجري استفتاء سريع أعلنت بعده موسكو ضم القرم رسمياً للأراضي الروسية.</li>
+                                <li><strong>أبريل 2014 (إشعال إقليم الدونباس):</strong> في شرق أوكرانيا، وتحديداً في مقاطعتي <strong>دونيتسك ولوغانسك</strong> (حيث توجد أغلبية ناطقة باللغة الروسية وصناعات الفحم والصلب الثقيلة)، اندلعت حركات تمرد مسلحة مدعومة بالسلاح والضباط من المخابرات الروسية، وأعلن الانفصاليون قيام "جمهوريتي دونيتسك ولوغانسك الشعبيتين".</li>
+                                <li><strong>اتفاقيات مينسك (2014 و2015):</strong> بعد معارك طاحنة في "إيلوفايسك" و"ديبالتسيفي" خسر فيها الجيش الأوكراني الضعيف آنذاك مساحات واسعة، وُقعت اتفاقيات "مينسك" برعاية فرنسا وألمانيا. كانت روسيا تريد من الاتفاقية منح إقليم الدونباس حكماً ذاتياً واسعاً يمكّنه من استخدام "حق الفيتو" لمنع أوكرانيا دستورياً من الانضمام للناتو، بينما استغلت أوكرانيا وحلفاؤها الغربيون السنوات الثماني (من 2014 إلى 2022) لإعادة بناء الجيش الأوكراني من الصفر على عقيدة الناتو التدريبية والتسليحية.</li>
+                            </ul>
+
+                            <div class="tactical-box">
+                                <h5 class="text-red-500 font-black text-lg mb-2">📌 الخلاصة الاستراتيجية للفصل الأول:</h5>
+                                <p class="text-sm text-zinc-300 mb-0">لم تبدأ هذه الحرب في 24 فبراير 2022، بل هي ذروة صراع عمره ثلاثة عقود بين مفهومين متناقضين للأمن: مفهوم "حق الدول ذات السيادة في اختيار تحالفاتها" الذي يتمسك به الغرب وأوكرانيا، ومفهوم "المجال الحيوي والأمن عبر المناطق العازلة" الذي تعتبره روسيا مسألة حياة أو موت لبقائها كقوة عظمى.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        number: 2,
+                        title: 'الفصل الثاني: صدمة الغزو (فبراير 2022) ولماذا فشلت خطة إسقاط كييف في 72 ساعة؟',
+                        readingTime: '22 دقيقة قراءة معمقة',
+                        summary: 'تشريح عسكري كامل لمعركة مطار أنطونوف (هوستوميل)، سر توقف الرتل العسكري الروسي بطول 64 كم، وكيف هزمت الأسلحة المحمولة (جافلين وإنلو) أرتال المدرعات.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/FGM-148_Javelin_in_service_with_the_Ukrainian_Army.jpg/800px-FGM-148_Javelin_in_service_with_the_Ukrainian_Army.jpg',
+                                caption: 'صاروخ FGM-148 Javelin الأمريكي المضاد للدروع في يد المشاة الأوكرانيين؛ السلاح الذي اعتمد على تقنية "أطلق وانسَ" والانقضاض السقفي على أبراج الدبابات.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Kamov_Ka-52%2C_Russia_-_Air_Force_AN2229621.jpg/800px-Kamov_Ka-52%2C_Russia_-_Air_Force_AN2229621.jpg',
+                                caption: 'مروحية الهجوم الروسية Ka-52 (التمساح) التي قادت عملية الإنزال الجوي الجريئة في مطار هوستوميل شمال كييف في اليوم الأول للحرب.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحليل عسكري تفصيلي: معركة مطار هوستوميل التي أنقذت كييف', url: 'https://www.youtube.com/results?search_query=معركة+مطار+هوستوميل+كييف' },
+                            { title: 'كيف يعمل صاروخ جافلين ضد الدبابات الروسية؟', url: 'https://www.youtube.com/results?search_query=كيف+يعمل+صاروخ+جافلين' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: الخطة الروسية الأصلية — عقيدة "قطع الرأس الخاطف" (Decapitation Strike)</h4>
+                            <p>في فجر يوم 24 فبراير 2022، أمر الرئيس الروسي فلاديمير بوتين ببدء ما أسماه "العملية العسكرية الخاصة". المفاجأة التي أذهلت المحللين العسكريين حول العالم لم تكن قرار الغزو نفسه، بل <strong>خطة الغزو وتوزيع القوات</strong>. فقد حشدت روسيا حوالي 190,000 جندي فقط، وقررت الهجوم بهم في وقت واحد على <strong>4 محاور جغرافية متباعدة جداً</strong> على جبهة تمتد لأكثر من 1,500 كيلومتر:</p>
+                            <ul>
+                                <li><strong>المحور الشمالي (من أراضي بيلاروسيا):</strong> التوجه مباشرة نحو العاصمة الأوكرانية كييف من الضفة الغربية لنهر دنيبرو، ومن منطقة تشيرنيهيف وسومي من الضفة الشرقية.</li>
+                                <li><strong>المحور الشرقي:</strong> الهجوم على مدينة خاركيف (ثاني أكبر مدينة أوكرانية) وتثبيت القوات الأوكرانية في إقليم الدونباس.</li>
+                                <li><strong>المحور الجنوبي الشرقي:</strong> التقدم نحو مدينة ماريوبول الاستراتيجية على بحر آزوف لربط الأراضي الروسية بشبه جزيرة القرم برياً.</li>
+                                <li><strong>المحور الجنوبي (من القرم):</strong> الاندفاع شمالاً وغرباً للسيطرة على مقاطعة خيرسون ومحطة زابوريجيا النووية والاندفاع نحو ميناء أوديسا.</li>
+                            </ul>
+                            <p>وفقاً للعلوم العسكرية الكلاسيكية، فإن مهاجمة دولة بحجم أوكرانيا (40 مليون نسمة وجيش يضم 250 ألف جندي نظامي ومئات الآلاف من الاحتياط) بقوة لا تتجاوز 190 ألف جندي موزعين على أربعة محاور هو انتحار تكتيكي؛ لأن القاعدة العسكرية تقول إن المهاجم يحتاج إلى تفوق عددي بنسبة (3 إلى 1) على الأقل. <strong>فلماذا فعلت القيادة الروسية ذلك؟</strong></p>
+                            <p>الإجابة تكمن في <strong>فشل استخباراتي ذريع لجهاز الأمن الفيدرالي الروسي (FSB)</strong>. كانت التقارير المرفوعة للكرملين تؤكد أن الحكومة الأوكرانية بقيادة فولوديمير زيلينسكي ستنهار وتفر من كييف بمجرد رؤية الدبابات الروسية، وأن الجيش الأوكراني سيلقي سلاحه كما حدث في القرم عام 2014، وأن العملية لن تستغرق أكثر من <strong>72 إلى 96 ساعة</strong> لتنصيب حكومة موالية لموسكو في كييف. لدرجة أن بعض الوحدات الروسية المتقدمة نحو كييف كانت تحمل في شاحناتها "البدلات العسكرية الاحتفالية" استعداداً لعرض النصر العسكري في شوارع كييف بعد ثلاثة أيام، ولم تكن تحمل وقوداً أو ذخيرة أو طعاماً يكفي لأكثر من خمسة أيام!</p>
+
+                            <h4>ثانياً: معركة مطار أنطونوف (هوستوميل) — اللحظة التي أفشلت الخطة الروسية</h4>
+                            <p>الركيزة الأساسية لخطة إسقاط كييف في 72 ساعة كانت تعتمد على عملية إنزال جوي جريئة جداً تُدرس اليوم في الأكاديميات العسكرية العالمية: <strong>السيطرة على مطار أنطونوف العسكري في ضاحية "هوستوميل"</strong>، الذي يبعد 25 كيلومتراً فقط عن قلب العاصمة كييف.</p>
+                            <p>كانت الخطة كالتالي: في الساعات الأولى من صباح 24 فبراير، تطير عشرات المروحيات القتالية الروسية (من طراز Ka-52 التمساح وMi-8) على ارتفاع منخفض جداً فوق نهر دنيبرو لتفادي الرادارات، وتنزل قوات النخبة من المظليين الروس (VDV) داخل مطار هوستوميل. مهمتهم هي تأمين مدرج المطار لمدة ساعتين فقط، ريثما تهبط فيه 18 طائرة نقل عسكري عملاقة من طراز (Ilyushin Il-76) محملة بآلاف الجنود والمدرعات الخفيفة، ليقتحموا العاصمة كييف والحي الحكومي من الداخل قبل أن يستفيق الجيش الأوكراني.</p>
+                            <p><strong>ماذا حدث على الأرض؟</strong> نجح المظليون الروس بالفعل في الهبوط والسيطرة على المطار ظهر يوم 24 فبراير. لكن المخابرات الأمريكية (CIA) كانت قد سلمت أوكرانيا تفاصيل هذه الخطة بدقة قبل أيام من الغزو. لذلك، تركت القيادة الأوكرانية لواء التدخل السريع الرابع للحرس الوطني ووحدات المدفعية في حالة تأهب قصوى حول المطار:</p>
+                            <ul>
+                                <li>بدلاً من الهجوم البري المباشر فوراً، قامت المدفعية الأوكرانية بقصف مدرج المطار نفسه بقذائف ثقيلة لإحداث حفر عميقة فيه، مما جعل هبوط طائرات النقل العملاقة (Il-76) المحملة بالجنود أمراً مستحيلاً واضطرها لتغيير مسارها نحو بيلاروسيا.</li>
+                                <li>شن اللواء الرابع الأوكراني هجوماً مضاداً شرساً في مساء اليوم نفسه ضد المظليين الروس الذين تُركوا في المطار بدون مدرعات ثقيلة وبدون إسناد مدفعي، مما أفقد روسيا "عنصر المفاجأة" تماماً ومنح العاصمة كييف 48 ساعة ذهبية لتوزيع السلاح وتحصين الشوارع.</li>
+                            </ul>
+
+                            <h4>ثالثاً: لغز الرتل العسكري الروسي بطول 64 كيلومتراً — حين تقتل اللوجستيات الجيوش</h4>
+                            <p>بعد فشل الجسر الجوي في هوستوميل، اضطر الجيش الروسي للدفع بقواته البرية الثقيلة عبر الطرق المعبدة القادمة من بيلاروسيا شمالاً باتجاه كييف. وهنا التقطت الأقمار الصناعية التجارية صوراً أذهلت العالم: <strong>رتل عسكري روسي يمتد لطول 64 كيلومتراً متوقف تماماً عن الحركة لأيام طويلة شمال كييف!</strong> كيف يتوقف جيش دولة عظمى بهذه الطريقة؟</p>
+                            <p>التفسير العسكري واللوجستي يرتكز على أربعة عوامل قاتلة:</p>
+                            <ul>
+                                <li><strong>1. وحل "الراسبوتيتسا" (Rasputitsa):</strong> بدأ الغزو في أواخر فبراير مع بداية ذوبان الثلوج، حيث تتحول التربة الأوكرانية السوداء إلى مستنقعات طينية عميقة تبتلع أي دبابة أو مدرعة تخرج عن الطريق الأسفلتي. وبالتالي، أُجبرت آلاف المركبات الروسية على السير في صف واحد فوق الطرق الأسفلتية الضيقة فقط.</li>
+                                <li><strong>2. تكتيك استهداف الرأس والذيل:</strong> استغلت وحدات الكوماندوز الأوكرانية الصغيرة (المزودة بدراجات رباعية الدفع ومسيرات "بيرقدار TB2" التركية) هذا الاصطفاف؛ فكانت تترك الدبابات وتستهدف أول ثلاث مركبات وآخر ثلاث مركبات في الرتل، وتركز نيرانها حصرياً على <strong>شاحنات الوقود وشاحنات الذخيرة</strong> غير المصفحة. بمجرد احتراق المركبات الأمامية، يتوقف الرتل بالكامل ويعجز عن الالتفاف لأن على يمينه ويساره طيناً وغابات كثيفة.</li>
+                                <li><strong>3. تفجير سد نهر إيربين (الحرب الهيدروليكية):</strong> اتخذ المهندسون العسكريون الأوكرانيون قراراً جريئاً بتفجير سد نهر "إيربين" شمال غرب كييف، مما أدى إلى إغراق مساحات شاسعة من الأراضي وتحويلها إلى بحيرة طينية عزلت القوات الروسية المتقدمة عن خطوط إمدادها.</li>
+                                <li><strong>4. الاعتماد الروسي على السكك الحديدية:</strong> العقيدة اللوجستية الروسية مصممة تاريخياً لنقل الإمدادات عبر القطارات وليس الشاحنات البرية لمسافات طويلة. وبما أن الأوكرانيين فجروا جميع تقاطعات السكك الحديدية المؤدية لروسيا وبيلاروسيا في اليوم الأول، عجزت الشاحنات الروسية القليلة عن تزويد الجبهة بالوقود والطعام.</li>
+                            </ul>
+
+                            <h4>رابعاً: ثورة الصواريخ المحمولة على الكتف — كيف هزم صاروخ بـ 170 ألف دولار دبابة بـ 4 ملايين دولار؟</h4>
+                            <p>شهدت الأسابيع الستة الأولى من الحرب مجزرة حقيقية للدروع الروسية (دبابات T-72B3 وT-80 وT-90) على يد المشاة الأوكرانيين الذين تحركوا في مجموعات صغيرة خفيفة تحمل على أكتافها صواريخ غربية مضادة للدروع، وأشهرها صاروخ <strong>Javelin (جافلين)</strong> الأمريكي، وقاذف <strong>NLAW</strong> البريطاني-السويدي، ومنظومة <strong>Stugna-P</strong> الأوكرانية المحلية.</p>
+                            <table class="dossier-table">
+                                <thead>
+                                    <tr>
+                                        <th>المنظومة / السلاح</th>
+                                        <th>التكلفة التقريبية</th>
+                                        <th>الميزة التكتيكية الحاسمة في معركة كييف</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>صاروخ FGM-148 Javelin</td>
+                                        <td>175,000 دولار</td>
+                                        <td>باحث حراري "أطلق وانسَ" + انقضاض عمودي على سقف البرج (سمك 60 ملم فقط).</td>
+                                    </tr>
+                                    <tr>
+                                        <td>دبابة T-72B3 / T-90 الروسية</td>
+                                        <td>3.5 - 4.5 مليون دولار</td>
+                                        <td>وجود 22 قذيفة في "الملقم الآلي" أسفل البرج يؤدي لانفجار الدبابة بالكامل عند اختراق السقف.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="tactical-box">
+                                <h5 class="text-red-500 font-black text-lg mb-2">📌 نتيجة المرحلة الأولى (أواخر مارس 2022):</h5>
+                                <p class="text-sm text-zinc-300 mb-0">أمام استنزاف خطوط الإمداد وتهديد القوات الروسية بالحصار شمال كييف، أعلنت وزارة الدفاع الروسية في 29 مارس 2022 انسحاباً كاملاً لقواتها من محيط كييف وتشرنيهيف وسومي، وسحبت قواتها لإعادة التمركز في شرق وجنوب أوكرانيا، لتبدأ مرحلة جديدة كلياً من الحرب: حرب الاستنزاف المدفعي والخنادق.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        number: 3,
+                        title: 'الفصل الثالث: ثورة الدرونات الرخيصة (FPV) وتشريح "خط سوروفيكين" الدفاعي',
+                        readingTime: '20 دقيقة قراءة معمقة',
+                        summary: 'كيف تحولت ساحة المعركة إلى "جبهة شفافة" يستحيل فيها الاختباء؟ ولماذا تحطم الهجوم الأوكراني المضاد عام 2023 أمام أكبر حقل ألغام في التاريخ الحديث؟',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Dragon%27s_teeth_fortification_in_Ukraine.jpg/800px-Dragon%27s_teeth_fortification_in_Ukraine.jpg',
+                                caption: 'عوائق خرسانية هرمية مضادة للدبابات تُعرف باسم "أسنان التنين" ضمن خطوط الدفاع المحصنة لإجبار المدرعات على التوقف في مرمى النيران.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/M142_HIMARS_in_Ukraine.jpg/800px-M142_HIMARS_in_Ukraine.jpg',
+                                caption: 'راجمة الصواريخ الدقيقة M142 HIMARS التي استخدمتها أوكرانيا لضرب مستودعات الذخيرة ومراكز القيادة خلف الخطوط.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'وثائقي: كيف غيرت مسيرات FPV الرخيصة شكل الحروب الحديثة للأبد؟', url: 'https://www.youtube.com/results?search_query=مسيرات+FPV+حرب+أوكرانيا' },
+                            { title: 'تشريح خط سوروفيكين الدفاعي ولماذا فشل الهجوم الأوكراني المضاد', url: 'https://www.youtube.com/results?search_query=خط+سوروفيكين+الدفاعي' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: الهجوم الأوكراني الخاطف في خاركيف وخيرسون (خريف 2022) ورد الفعل الروسي</h4>
+                            <p>في سبتمبر وأكتوبر 2022، نجح الجيش الأوكراني في تنفيذ عملية خداع استراتيجي بارعة؛ حيث أعلن طوال الصيف أنه سيهاجم في مقاطعة "خيرسون" جنوباً، فدفعت روسيا بأفضل قواتها إلى هناك. وفجأة، شنت القوات الأوكرانية هجوماً خاطفاً بمركبات سريعة في مقاطعة <strong>خاركيف</strong> شمال شرق البلاد حيث كانت الخطوط الروسية هشة جداً، فانهارت الدفاعات الروسية وحررت أوكرانيا أكثر من 12,000 كيلومتر مربع في أسبوع واحد، تلاها في نوفمبر 2022 انسحاب الجيش الروسي من مدينة خيرسون إلى الضفة الشرقية لنهر دنيبرو.</p>
+                            <p>هنا أدرك الكرملين أن الحرب لم تعد "عملية خاصة محدودة"، فاتخذ ثلاثة قرارات قلبت موازين القوى في عام 2023 و2024:</p>
+                            <ul>
+                                <li>إعلان <strong>"التعبئة الجزئية"</strong> واستدعاء 300,000 جندي احتياط لسد الفراغات الهائلة في الجبهة.</li>
+                                <li>تحويل الاقتصاد الروسي إلى "اقتصاد حرب" يعمل فيه قطاع التصنيع العسكري بنظام الثلاث ورديات على مدار 24 ساعة.</li>
+                                <li>تكليف الجنرال <strong>سيرغي سوروفيكين</strong> ببناء أعقد وأضخم خط دفاعي محصن في أوروبا منذ الحرب العالمية الثانية، عُرف عالمياً باسم <strong>"خط سوروفيكين" (Surovikin Line)</strong>.</li>
+                            </ul>
+
+                            <h4>ثانياً: تشريح هندسي لـ "خط سوروفيكين" — لماذا تحطمت عليه دبابات ليوبارد وبرادلي في صيف 2023؟</h4>
+                            <p>طوال شتاء وربيع 2023، درب حلف الناتو 9 ألوية أوكرانية جديدة وسلحها بأحدث الدبابات الغربية (ليوبارد 2 الألمانية، تشالنجر 2 البريطانية، ومدرعات برادلي الأمريكية) بهدف شن "الهجوم المضاد الكبير" في يونيو 2023 جنوب مقاطعة زابوريجيا للوصول إلى بحر آزوف وقطع الجسر البري الروسي المؤدي للقرم.</p>
+                            <p>لكن عندما تقدمت الأرتال الأوكرانية، اصطدمت بمنظومة دفاعية هندسية متعددة الطبقات يبلغ عمقها 30 كيلومتراً:</p>
+                            <ul>
+                                <li><strong>الطبقة الأولى (مناطق القتل بحقول الألغام الكثيفة):</strong> بدلاً من زراعة الألغام بالمعايير العسكرية المعتادة، زرع المهندسون الروس ما يصل إلى <strong>5 ألغام في كل متر مربع واحد</strong>، بمزيج من ألغام مضادة للدبابات (TM-62) وألغام مضادة للأفراد لمنع خبراء تفكيك الألغام من الاقتراب.</li>
+                                <li><strong>الطبقة الثانية (العوائق الهندسية وخنادق الدبابات):</strong> خلف حقول الألغام وُضعت صفوف متتالية من الأهرامات الخرسانية المسلحة المرتبطة بسلاسل فولاذية ("أسنان التنين")، تليها خنادق عميقة مضادة للدبابات بعرض 4 أمتار وعمق 3 أمتار. الهدف من هذه العوائق ليس منع الدبابة للأبد، بل <strong>إجبار الدبابة على التوقف أو الالتفاف في مسار ضيق ومحدد مسبقاً</strong>.</li>
+                                <li><strong>الطبقة الثالثة (كمائن المروحيات والمدفعية الإحداثية):</strong> بمجرد أن تتوقف الدبابات وكاسحات الألغام الأوكرانية أمام حقل الألغام، كانت مروحيات (Ka-52 التمساح) الروسية تحلق على مسافة 8 إلى 10 كيلومترات خلف الجبهة (وهي مسافة أبعد من مدى صواريخ ستينغر المحمولة على الكتف التي يملكها المشاة الأوكرانيون)، وتطلق صواريخ "فيخر" (Vikhr) الموجهة بالليزر لتدمير المدرعات المتوقفة واحدة تلو الأخرى، بالتزامن مع قصف المدفعية الروسية المسبقة التوجيه على نفس الإحداثيات.</li>
+                            </ul>
+
+                            <h4>ثالثاً: ثورة المسيرات الانتحارية (FPV Drones) — نهاية عصر الاختباء في الميدان</h4>
+                            <p>إذا كانت الحرب العالمية الأولى قد شهدت ميلاد الدبابة، والحرب العالمية الثانية شهدت ميلاد السلاح النووي وحاملات الطائرات، فإن حرب أوكرانيا هي <strong>حرب المسيرات الرخيصة (FPV - First Person View)</strong> بامتياز. لقد غيرت هذه التكنولوجيا العقيدة العسكرية العالمية إلى الأبد لسبب اقتصادي وتكتيكي مذهل:</p>
+                            <ul>
+                                <li><strong>معادلة التكلفة المرعبة:</strong> قذيفة المدفعية الموجهة بدقة (مثل Excalibur الأمريكية) تكلف حوالي 100,000 دولار، وصاروخ الجافلين يكلف 170,000 دولار. أما طائرة الـ FPV المسيرة (وهي طائرة سباق رباعية المراوح يرتدي مشغلها نظارة واقع افتراضي ويقودها كأنه بداخلها)، فإن تكلفتها لا تتجاوز <strong>400 إلى 600 دولار فقط!</strong> يثبت الجندي عليها قذيفة RPG قديمة أو عبوة ناسفة، ويطير بها لمسافة 10 إلى 15 كيلومتراً ليدخل بها من نافذة خندق أو يضرب مؤخرة محرك دبابة ثمنها 5 ملايين دولار فيدمرها بالكامل.</li>
+                                <li><strong>مفهوم "ساحة المعركة الشفافة" (Transparent Battlefield):</strong> في كل كيلومتر واحد من الجبهة اليوم، تحلق في السماء على مدار الساعة عشرات طائرات الاستطلاع (مثل DJI Mavic الصينية ومسيرات Orlan-10 وZALA الروسية). هذا يعني أن أي تحرك لأكثر من مركبتين أو ثلاثة جنود يتم رصده في أقل من دقيقتين، وتنطلق نحوه فوراً أسراب مسيرات الـ FPV أو مسيرات "لانسيت" (Lancet) الروسية الانتحارية. نتيجة لذلك، اختفت الهجمات المدرعة الكبرى، وعجز الطرفان عن حشد قوات كبيرة دون أن تُكتشف وتُباد قبل وصولها لخط التماس.</li>
+                                <li><strong>الجيل الأحدث (مسيرات الألياف الضوئية Fiber-Optic Drones):</strong> عندما بدأ الطرفان في استخدام أجهزة التشويش الإلكتروني (EW Jammers) لقطع الإشارة اللاسلكية بين الجندي والمسيرة، ابتكر المهندسون مسيرات تسحب خلفها خيطاً رفيعاً جداً من الألياف الضوئية بطول 10 إلى 20 كيلومتراً أثناء طيرانها! هذا الخيط ينقل الصورة والأوامر بسرعة الضوء ويستحيل التشويش عليه بأي منظومة حرب إلكترونية في العالم.</li>
+                            </ul>
+
+                            <h4>رابعاً: القنابل الانزلاقية الروسية (FAB / UMPK) — السلاح الذي كسر التحصينات الأوكرانية في 2024-2025</h4>
+                            <p>نجحت القوات الروسية في السيطرة على قلعة "أفدييفكا" الحصينة والتقدم في شرق أوكرانيا بفضل ابتكار بسيط ورخيص جداً: <strong>أجنحة التوجيه الانزلاقية (UMPK)</strong>. كانت روسيا تمتلك في مخازنها مئات الآلاف من القنابل الحديدية السوفيتية الغبية القديمة التي تزن 500 كجم (FAB-500) و1,500 كجم (FAB-1500) وحتى 3,000 كجم (FAB-3000)، لكن الطائرات الروسية لم تكن تستطيع الاقتراب لإلقائها فوق المدن الأوكرانية خوفاً من صواريخ الدفاع الجوي (باتريوت وS-300).</p>
+                            <p>الحل الروسي كان تركيب أجنحة معدنية قابلة للطي وجهاز توجيه بالأقمار الصناعية (تكلفتها بضعة آلاف من الدولارات) على هذه القنابل الضخمة. الآن، تطير المقاتلة الروسية (Su-34) على مسافة آمنة تبلغ <strong>60 إلى 70 كيلومتراً خلف خط الجبهة</strong> (خارج مدى الدفاع الجوي الأوكراني المتوسط)، وتلقي القنبلة التي تنزلق في الهواء وتضرب المباني المحصنة والخنادق الخرسانية الأوكرانية بقوة تفجيرية تعادل زلزالاً صغيراً يترك حفرة بعمق 15 متراً، وهو سلاح لا تستطيع منظومات الدفاع الجوي اعتراضه بسهولة لأن القنبلة لا تملك محركاً حرارياً وصغيرة البصمة الرادارية.</p>
+                        `
+                    },
+                    {
+                        number: 4,
+                        title: 'الفصل الرابع: الحرب الاقتصادية العالمية — العقوبات، نظام سويفت، وأسطول الظل',
+                        readingTime: '19 دقيقة قراءة معمقة',
+                        summary: 'كيف صمد الاقتصاد الروسي أمام أكثر من 16,000 عقوبة غربية؟ قصة تجميد الـ 300 مليار دولار، انقلاب مسارات الغاز نحو آسيا، وظهور "أسطول الظل" لناقلات النفط.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/BRICS_members_2024.svg/800px-BRICS_members_2024.svg.png',
+                                caption: 'خريطة تكتل دول بريكس (BRICS) المتوسع؛ حيث وفرت الصين والهند ودول الجنوب العالمي شرياناً اقتصادياً بديلاً لروسيا خارج العقوبات الغربية.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'وثائقي اقتصاد الحرب: كيف التفت روسيا على العقوبات الغربية؟', url: 'https://www.youtube.com/results?search_query=كيف+التفت+روسيا+على+العقوبات+الاقتصادية' },
+                            { title: 'ما هو أسطول الظل الروسي لنقل النفط؟', url: 'https://www.youtube.com/results?search_query=أسطول+الظل+الروسي+النفط' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: "الصدمة والرعب المالي" — سلاح العقوبات الغربية غير المسبوق</h4>
+                            <p>في الأيام التي تلت 24 فبراير 2022، شنت الولايات المتحدة والاتحاد الأوروبي ومجموعة السبع (G7) أعنف حرب اقتصادية ومالية في التاريخ الحديث ضد دولة كبرى. كانت الخطة الغربية تهدف إلى إحداث انهيار فوري في سعر صرف الروبل الروسي، وإفلاس البنوك الروسية، وشل قدرة الكرملين على تمويل الحرب خلال أشهر قليلة. وشملت الحزمة الاقتصادية الغربية ثلاث ضربات رئيسية:</p>
+                            <ul>
+                                <li><strong>تجميد احتياطيات البنك المركزي الروسي:</strong> كانت روسيا قد جمعت "صندوق حرب" ضخماً يقدر بـ 640 مليار دولار من الذهب والعملات الأجنبية تحسباً للأزمات. لكن المفاجأة كانت أن قرابة نصف هذا المبلغ (حوالي <strong>300 مليار دولار</strong>) كان مودعاً في شكل سندات وحسابات لدى بنوك أوروبية وأمريكية ويابانية. وفي ليلة واحدة، جمد الغرب هذه الأموال بالكامل وحرم موسكو من الوصول إليها.</li>
+                                <li><strong>الطرد من نظام سويفت (SWIFT):</strong> تم فصل كبرى البنوك الروسية عن شبكة المدفوعات المالية العالمية، مما جعل التحويلات البنكية المباشرة للاستيراد والتصدير مع الغرب شبه مستحيلة.</li>
+                                <li><strong>سقف سعر النفط الروسي (60 دولاراً للبرميل):</strong> نظراً لأن أكثر من 90% من شركات التأمين البحري على ناقلات النفط في العالم توجد في لندن وأوروبا، منع الغرب تقديم خدمات الشحن والتأمين لأي ناقلة تحمل نفطاً روسياً تم شراؤه بسعر يتجاوز 60 دولاراً للبرميل، بهدف تقليص عائدات موسكو دون إخراج النفط الروسي من السوق العالمي حتى لا تشتعل أسعار البنزين عالمياً.</li>
+                            </ul>
+
+                            <h4>ثانياً: لماذا لم ينهر الاقتصاد الروسي؟ — الهندسة المالية لـ "إلفيرا نابيولينا"</h4>
+                            <p>في الأسبوع الأول للحرب، هوى الروبل الروسي فعلاً إلى مستوى 135 روبل مقابل الدولار الواحد، واصطف الروس أمام ماكينات الصراف الآلي. لكن محافظة البنك المركزي الروسي، <strong>إلفيرا نابيولينا</strong> (التي تُصنف كواحدة من أذكى التكنوقراط الماليين في العالم)، تدخلت بإجراءات طوارئ حاسمة أنقذت النظام المالي الروسي خلال أسابيع:</p>
+                            <ul>
+                                <li><strong>1. رفع الفائدة القياسي وفرض ضوابط رأس المال:</strong> رفعت سعر الفائدة فوراً من 9.5% إلى 20%، ومنعت المواطنين والشركات الأجنبية من سحب وتحويل مليارات الدولارات إلى خارج روسيا.</li>
+                                <li><strong>2. إجبار المصدرين على بيع العملة الصعبة:</strong> ألزمت شركات النفط والغاز والمعادن والقمح الروسية بتحويل 80% من عائداتها بالدولار واليورو إلى الروبل داخل السوق الروسي، مما خلق طلباً إجبارياً هائلاً على الروبل ورفع قيمته مجدداً.</li>
+                                <li><strong>3. معادلة "الغاز مقابل الروبل":</strong> أصدر بوتين مرسوماً يلزم الدول الأوروبية (التي كانت لا تزال تعتمد بشدة على الغاز الروسي في 2022) بفتح حسابات في "غازبروم بنك" والدفع بالروبل، مما وفر لروسيا فائضاً تجارياً تاريخياً تجاوز 220 مليار دولار في العام الأول للحرب بسبب ارتفاع أسعار الطاقة عالمياً.</li>
+                            </ul>
+
+                            <h4>ثالثاً: "أسطول الظل" (Shadow Fleet) والانعطاف الكبير نحو الصين والهند</h4>
+                            <p>عندما أوقفت أوروبا استيراد النفط الروسي المنقول بحراً وفُجر خط أنابيب الغاز "نورد ستريم" في بحر البلطيق، نفذت موسكو أكبر عملية إعادة توجيه لسلاسل إمداد الطاقة في التاريخ الحديث. ولتفادي العقوبات الغربية على شركات الشحن والتأمين البريطانية، استثمرت روسيا أكثر من 10 مليارات دولار لشراء مئات ناقلات النفط القديمة عبر شركات واجهة مسجلة في دول مختلفة، لتشكيل ما بات يُعرف بـ <strong>"أسطول الظل" (قرابة 600 إلى 800 ناقلة نفط)</strong>.</p>
+                            <p>هذه الناقلات تعمل خارج مظلة التأمين الغربي، وتغلق أجهزة التتبع الملاحي (AIS) في عرض البحر، وتنقل ملايين البراميل يومياً عبر قناة السويس أو حول أفريقيا والمحيط المتجمد الشمالي إلى زبونين رئيسيين عوضا السوق الأوروبي بالكامل:</p>
+                            <ul>
+                                <li><strong>الهند:</strong> قبل الحرب، كانت الهند تستورد أقل من 1% من نفطها من روسيا. بعد الحرب، قفزت الواردات الهندية من النفط الروسي المخفض السعر لتشكل أكثر من <strong>40% من إجمالي واردات الهند النفطية</strong>! والمفارقة الاقتصادية الكبرى أن المصافي الهندية تقوم بتكرير هذا النفط الروسي وتحويله إلى ديزل ووقود طائرات، ثم تبيعه مرة أخرى إلى دول الاتحاد الأوروبي بأسعار السوق العالمية وبشكل قانوني تماماً لأن النفط بعد تكريره في الهند يُعامل جمركياً كمنتج هندي وليس روسياً!</li>
+                                <li><strong>الصين (الشريان الاقتصادي والتكنولوجي):</strong> تحولت التجارة بين روسيا والصين لتتجاوز <strong>240 مليار دولار سنوياً</strong>، ويتم تسوية أكثر من 90% منها بعملتي "اليوان الصيني" و"الروبل الروسي" بعيداً عن الدولار ونظام سويفت. تصدر روسيا للصين النفط والغاز والفحم والأخشاب، وتستورد منها السيارات، الآلات الصناعية، والأهم من ذلك: <strong>الرقائق الإلكترونية المزدوجة الاستخدام (Dual-Use Microchips)</strong> وأجهزة CNC اللازمة لتصنيع الصواريخ والمدرعات.</li>
+                            </ul>
+
+                            <h4>رابعاً: "الكينزية العسكرية" — نقاط القوة ونقاط الضعف الكامنة في اقتصاد الحرب الروسي</h4>
+                            <p>حقق الاقتصاد الروسي نمواً في الناتج المحلي الإجمالي بنسبة قاربت 3.6% في عامي 2023 و2024، وهو رقم فاجأ صندوق النقد الدولي. يطلق الاقتصاديون على هذه الظاهرة اسم <strong>"الكينزية العسكرية" (Military Keynesianism)</strong>؛ حيث تضخ الدولة تريليونات الروبلات من الميزانية العامة في مصانع السلاح، والذخيرة، والملابس العسكرية، وتدفع رواتب ومكافآت ضخمة للجنود المتطوعين وعائلاتهم. هذه الأموال تتحول إلى استهلاك محلي ينشط الأسواق والمقاولات داخل روسيا.</p>
+                            <p>لكن على المدى الطويل، يواجه هذا النمو ثلاثة اختناقات خطيرة:</p>
+                            <ul>
+                                <li><strong>نقص حاد في الأيدي العاملة:</strong> بسبب تجنيد مئات الآلاف في الجيش وهجرة قرابة مليون شاب متعلم (خاصة في قطاع التكنولوجيا) خارج البلاد، تعاني المصانع المدنية الروسية من عجز شديد في العمال والمهندسين، مما دفع البطالة لأدنى مستوى تاريخي (أقل من 2.6%) لكنه أشعل تضخم الأجور والأسعار.</li>
+                                <li><strong>التضخم المرتفع وأسعار الفائدة الخانقة:</strong> اضطر البنك المركزي الروسي لرفع أسعار الفائدة إلى مستويات تفوق 18% - 21% لكبح التضخم، مما يجعل الاقتراض للشركات المدنية غير العسكرية مكلفاً للغاية.</li>
+                                <li><strong>الارتباط الكلي بأسعار النفط العالمية:</strong> طالما بقي سعر برميل النفط العالمي فوق 70 دولاراً، تستطيع روسيا تمويل الحرب لسنوات طويلة، أما أي انهيار عالمي في أسعار النفط فسيضرب الميزانية الفيدرالية الروسية في مقتل.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+
+            gaza: {
+                id: 'gaza',
+                title: 'حرب غزة والشرق الأوسط: صراع الأنفاق، الذكاء الاصطناعي، والمضايق البحرية',
+                subtitle: 'دراسة استراتيجية شاملة لأعنف صراع في تاريخ الشرق الأوسط الحديث: من الاختراق الاستخباراتي في 7 أكتوبر وحرب الأعماق الحضرية، إلى المواجهة الإيرانية الإسرائيلية المباشرة وحرب البحر الأحمر.',
+                region: 'الشرق الأوسط / شرق المتوسط والبحر الأحمر',
+                startDate: '7 أكتوبر 2023 - مستمرة بتداعياتها الإقليمية',
+                coverImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Iron_Dome_launches_interceptor.jpg/1024px-Iron_Dome_launches_interceptor.jpg',
+                metrics: [
+                    { label: 'مساحة قطاع غزة الجغرافية', value: '365 كم² فقط (أعلى كثافة سكانية)' },
+                    { label: 'طول شبكة الأنفاق التحت أرضية المقدر', value: '500 إلى 700 كيلومتر' },
+                    { label: 'تكلفة الصاروخ الاعتراضي الواحد (حيتس/ستاندرد)', value: '2 إلى 3.5 مليون دولار' },
+                    { label: 'نسبة التجارة العالمية المارة عبر باب المندب', value: '12% إلى 15% من التجارة البحرية' }
+                ],
+                chapters: [
+                    {
+                        number: 1,
+                        title: 'الفصل الأول: زلزال 7 أكتوبر — كيف انهارت منظومة الإنذار المبكر و"الجدار الحديدي" الذكي؟',
+                        readingTime: '20 دقيقة قراءة معمقة',
+                        summary: 'تشريح استخباراتي وعسكري لعملية "طوفان الأقصى": الخداع الاستراتيجي لعامين، تحييد أبراج "يرى ويطلق" بالمسيرات التجارية، وانهيار "فرقة غزة" في ساعتين.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gaza_Strip_map2.svg/600px-Gaza_Strip_map2.svg.png',
+                                caption: 'خريطة جغرافية لقطاع غزة توضح ضيق المساحة (بطول 41 كم وعرض يتراوح بين 6 و12 كم) والمستوطنات والقواعد العسكرية المحيطة بغلاف غزة.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Iron_Dome_launches_interceptor.jpg/800px-Iron_Dome_launches_interceptor.jpg',
+                                caption: 'منظومة القبة الحديدية أثناء إطلاق صواريخ تامير الاعتراضية؛ المنظومة التي تعرضت لإغراق صاروخي كثيف صباح 7 أكتوبر.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحقيق وثائقي: كيف تم التخطيط ليوم 7 أكتوبر وكيف فشل الجدار الذكي؟', url: 'https://www.youtube.com/results?search_query=تحقيق+7+أكتوبر+الفشل+الاستخباراتي' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: العقيدة الأمنية الإسرائيلية قبل 7 أكتوبر — وهم "التفوق التكنولوجي المطلق"</h4>
+                            <p>لفهم حجم الصدمة العسكرية والسياسية التي أحدثها صباح يوم السبت 7 أكتوبر 2023، يجب أولاً فهم المنظومة التي بنتها إسرائيل حول قطاع غزة على مدار 17 عاماً منذ فرض الحصار عام 2007. في عام 2021، أعلنت وزارة الدفاع الإسرائيلية اكتمال بناء أعقد حاجز حدودي تكنولوجي في العالم على طول الحدود مع غزة (بطول 65 كيلومتراً)، بتكلفة تجاوزت <strong>1.1 مليار دولار (3.5 مليار شيكل)</strong>، وأطلقت عليه اسم <strong>"العائق الذكي" أو "الجدار الحديدي"</strong>.</p>
+                            <p>كان هذا الجدار يتكون من أربع طبقات متكاملة جعلت القيادات العسكرية الإسرائيلية تعتقد أن اختراق الحدود برياً بات أمراً مستحيلاً من الناحية الهندسية:</p>
+                            <ul>
+                                <li><strong>جدار خرساني تحت الأرض:</strong> يمتد لعمق عشرات الأمتار تحت التربة، ومزود بأجهزة استشعار اهتزازية وصوتية فائقة الحساسية لرصد أي محاولة لحفر نفق هجومي يعبر الحدود.</li>
+                                <li><strong>سياج فولاذي ذكي فوق الأرض:</strong> بارتفاع 6 أمتار، مزود بكاميرات حرارية ورادارات ترصد حركة أي كائن حي يقترب لمسافة مئات الأمتار.</li>
+                                <li><strong>أبراج "يرى ويطلق" (Ro'eh-Yoreh):</strong> وهي أبراج خرسانية عالية تنتشر على طول الحدود، يعلوها رشاش ثقيل يتم التحكم فيه عن بُعد بالذكاء الاصطناعي ومن داخل غرف تحكم محصنة تبعد كيلومترات عن الحدود، بحيث تستطيع المجندات إطلاق النار فوراً على أي متسلل بضغطة زر.</li>
+                                <li><strong>التفوق الاستخباراتي السيبراني (الوحدة 8200 والشاباك):</strong> التنصت الكامل على كل مكالمة هاتفية، ورسالة نصية، وإشارة لاسلكية، بالإضافة إلى طائرات الاستطلاع بدون طيار التي لا تفارق سماء غزة لحظة واحدة.</li>
+                            </ul>
+
+                            <h4>ثانياً: الخداع الاستراتيجي — كيف تم تضليل أقوى أجهزة المخابرات لمدة عامين؟</h4>
+                            <p>في العلوم الاستراتيجية، يُقارن ما حدث قبل 7 أكتوبر بعملية الخداع الاستراتيجي في حرب أكتوبر 1973، حيث وقع جهاز المخابرات العسكرية الإسرائيلية (أمان) وجهاز الأمن الداخلي (الشاباك) في فخ ما يُسمى بـ <strong>"الكونسيبتسيا" (التصور المسبق الجامد)</strong>.</p>
+                            <p>على مدار عامين كاملين (منذ معركة مايو 2021)، رسخت قيادة حماس في غزة (بقيادة يحيى السنوار ومحمد الضيف ومروان عيسى) قناعة راسخة لدى المخابرات الإسرائيلية بأن الحركة لم تعد راغبة في أي مواجهة عسكرية كبرى، وأنها منشغلة بإدارة القطاع اقتصادياً، والحصول على تصاريح عمل لـ 18,000 عامل من غزة داخل إسرائيل، وتلقي المنح المالية الشهرية لدفع الرواتب. ولإحكام هذا الخداع:</p>
+                            <ul>
+                                <li>امتنعت حماس تماماً عن المشاركة في جولات التصعيد القصيرة التي خاضتها حركة "الجهاد الإسلامي" في عامي 2022 و2023، مما عزز قناعة تل أبيب بأن حماس "مردوعة تماماً".</li>
+                                <li>أُجريت التدريبات العسكرية لقوات "النخبة" القسامية (بما في ذلك بناء مجسمات كاملة للمستوطنات والقواعد العسكرية الإسرائيلية) في وضح النهار وأمام أعين طائرات الاستطلاع الإسرائيلية، بحيث اعتاد ضباط المخابرات رؤيتها واعتبروها مجرد "استعراضات دعائية للاستهلاك المحلي".</li>
+                                <li><strong>الأمن العملياتي المطلق (العودة للاتصالات السلكية والورقية):</strong> تم عزل دائرة التخطيط لتوقيت ساعة الصفر في حلقة ضيقة للغاية لا تتجاوز أصابع اليد الواحدة، ولم يتم استخدام الهواتف الذكية أو الإنترنت مطلقاً في نقل أوامر التعبئة، بل اعتمدت الكتائب على شبكة هواتف أرضية سلكية مدفونة داخل الأنفاق لا يمكن للوحدة 8200 اختراقها إلكترونياً عن بُعد.</li>
+                            </ul>
+
+                            <h4>ثالثاً: التسلسل التكتيكي للهجوم في الساعة 6:29 صباحاً — "إعماء العيون وقطع الاتصالات"</h4>
+                            <p>لم يكن هجوم 7 أكتوبر مجرد اقتحام عشوائي للسياج، بل نُفذ وفق تسلسل عسكري حديث يدمج بين القصف التمهيدي، الحرب السيبرانية، المسيرات، والقوات الخاصة على النحو التالي:</p>
+                            <ul>
+                                <li><strong>1. المرحلة الأولى (إعماء الأبراج الذكية بالمسيرات الرخيصة):</strong> قبل أن يقترب أي مقاتل من السياج الحدودي، انطلقت عشرات الطائرات المسيرة التجارية الصغيرة (Quadcopters) وحلقت مباشرة فوق أبراج المراقبة الإسرائيلية وأبراج "يرى ويطلق" وهوائيات الاتصالات الخلوية والعسكرية، وألقت عليها عبوات متفجرة صغيرة بشكل عمودي. في دقائق معدودة، تحطمت الكاميرات الحساسة والرشاشات الآلية وانقطعت الصورة تماماً عن غرف العمليات في مقر "فرقة غزة" في قاعدة رعيم!</li>
+                                <li><strong>2. المرحلة الثانية (الإغراق الصاروخي والالتفاف الجوي):</strong> بالتزامن مع ضرب الأبراج، انطلقت رشقات صاروخية كثيفة تجاوزت 3,000 قذيفة وصاروخ في الساعات الأولى لإرباك منظومة "القبة الحديدية" وإجبار الجنود في القواعد الحدودية على الهروب نحو الملاجئ المحصنة (الميغونيت). وتحت غطاء الصواريخ، عبر مقاتلو المظلات الشراعية المزودة بمحركات (Paragliders) فوق الجدار لتأمين نقاط ارتكاز خلف الخطوط.</li>
+                                <li><strong>3. المرحلة الثالثة (فتح الثغرات الهندسية واقتحام القواعد):</strong> تقدم سلاح الهندسة التابع للقسام على الدراجات النارية وزرع عبوات ناسفة موجهة في عشرات النقاط على طول السياج الفولاذي، وتبعتهم الجرافات لتوسيع أكثر من <strong>30 إلى 60 ثغرة برية</strong> تدفق عبرها نحو 3,000 مقاتل في شاحنات الدفع الرباعي والدراجات النارية.</li>
+                                <li><strong>4. المرحلة الرابعة (ضرب عقدة القيادة والسيطرة):</strong> بدلاً من الاكتفاء بمهاجمة النقاط الأمامية، اتجهت القوة الضاربة مباشرة نحو مقر قيادة <strong>"فرقة غزة" في قاعدة رعيم</strong>، وقاعدة الاستخبارات البصرية في <strong>"ناحل عوز"</strong>، ومعبر إيريز. هذا الهجوم المباشر على غرف القيادة شل قدرة الجيش الإسرائيلي على فهم ما يحدث في الميدان لأكثر من 6 إلى 8 ساعات متواصلة، وأدى لأسر أكثر من 250 شخصاً من العسكريين والمدنيين واقتيادهم إلى داخل أنفاق قطاع غزة.</li>
+                            </ul>
+
+                            <div class="tactical-box">
+                                <h5 class="text-red-500 font-black text-lg mb-2">📌 الدرس العسكري الأهم من الفصل الأول:</h5>
+                                <p class="text-sm text-zinc-300 mb-0">أثبت يوم 7 أكتوبر قاعدة عسكرية خالدة: التكنولوجيا المتطورة وأجهزة الاستشعار والذكاء الاصطناعي لا يمكن أبداً أن تكون بديلاً عن الجاهزية البشرية والعقيدة القتالية؛ فعندما يعتمد جيش نظامي كلياً على نظام تقني مركزي واحد، فإن تعطيل "عيون" هذا النظام بوسائل بدائية رخيصة يؤدي إلى شلل المنظومة الدفاعية بأكملها.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        number: 2,
+                        title: 'الفصل الثاني: حرب الأعماق الحضرية — كيف تعمل شبكة "مترو غزة" وما هي معركة المسافة صفر؟',
+                        readingTime: '22 دقيقة قراءة معمقة',
+                        summary: 'لماذا فشل سلاح الجو والدبابات في حسم المعركة سريعاً؟ تشريح هندسي لأنفاق غزة، المواجهة بين منظومة "تروفي" وقذيفة "الياسين 105"، واستخدام الذكاء الاصطناعي (لافندر) في القصف.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Merkava_Mk4M_Windbreaker.jpg/800px-Merkava_Mk4M_Windbreaker.jpg',
+                                caption: 'دبابة ميركافا 4 (Merkava Mk 4M) الإسرائيلية المزودة بمنظومة الحماية النشطة "تروفي" (معطف الريح) لاعتراض القذائف المضادة للدروع.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/IDF_Caterpillar_D9R.jpg/800px-IDF_Caterpillar_D9R.jpg',
+                                caption: 'جرافة الهندسة العسكرية المصفحة Caterpillar D9 التي تتقدم أرتال الدبابات الإسرائيلية لتجريف المباني وتفجير العبوات وكشف فتحات الأنفاق.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحليل هندسي وعسكري: لماذا يصعب تدمير أنفاق غزة؟', url: 'https://www.youtube.com/results?search_query=هندسة+أنفاق+غزة+تحليل+عسكري' },
+                            { title: 'المواجهة التكتيكية: دبابة الميركافا ومنظومة تروفي ضد قذيفة الياسين 105', url: 'https://www.youtube.com/results?search_query=الميركافا+ضد+الياسين+105' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: المعضلة الجغرافية لغزة — كيف تعوض الأرض تحت السطح غياب الجبال والغابات؟</h4>
+                            <p>قطاع غزة هو شريط ساحلي ضيق ومنبسط تماماً؛ طوله 41 كيلومتراً وعرضه يتراوح بين 6 إلى 12 كيلومتراً فقط، وتبلغ مساحته الإجمالية 365 كيلومتراً مربعاً يقطنها أكثر من 2.3 مليون إنسان. في العقيدة العسكرية التقليدية، هذه الجغرافيا تعتبر <strong>"بيئة مستحيلة لحرب العصابات"</strong>؛ فلا توجد جبال شاهقة للاختباء فيها كما في أفغانستان أو اليمن، ولا توجد أدغال وغابات كثيفة تحجب الرؤية الجوية كما في فيتنام، والقطاع محاصر بالكامل من البر والبحر والجو.</p>
+                            <p>للتغلب على هذه الحتمية الجغرافية، ابتكرت الفصائل الفلسطينية في غزة على مدار عقدين ما يُعرف في الأدبيات العسكرية الحديثة بـ <strong>"الجغرافيا الاصطناعية العمودية"</strong>: نقل المعركة بالكامل من فوق سطح الأرض (حيث يمتلك الجيش الإسرائيلي سيطرة جوية وفضائية مطلقة) إلى باطن الأرض، عبر حفر شبكة أنفاق عنكبوتية معقدة يقدر طولها ما بين <strong>500 إلى 700 كيلومتر</strong> (وهو ما يفوق طول شبكة مترو أنفاق لندن بالكامل داخل مساحة تقل عن ربع مساحة لندن).</p>
+
+                            <h4>ثانياً: التشريح الهندسي لـ "مترو غزة" — لماذا لا تكفي القنابل الخارقة للتحصينات لتدميره؟</h4>
+                            <p>عندما دخلت الفرق المدرعة الإسرائيلية إلى شمال غزة وخان يونس ورفح، اكتشفت أن الأنفاق ليست مجرد ممرات ترابية بدائية، بل هي منظومة هندسية تنقسم إلى ثلاثة مستويات عمودية:</p>
+                            <ul>
+                                <li><strong>المستوى الأول (الأنفاق التكتيكية القتالية على عمق 8 إلى 15 متراً):</strong> وهي أنفاق ضيقة مبطنة ببلاطات خرسانية مقوسة مسبقة الصب، تربط بين المنازل والمدارس والشوارع الفرعية. وظيفتها هي تمكين المقاتلين من الظهور فجأة من "عين نفق" (فتحة مخفية) خلف الدبابات الإسرائيلية، وإطلاق قذيفة واحدة، ثم الاختفاء تحت الأرض في أقل من 60 ثانية والظهور في شارع آخر يبعد 300 متر.</li>
+                                <li><strong>المستوى الثاني (أنفاق القيادة واللوجستيات والورش على عمق 20 إلى 35 متراً):</strong> تضم غرف استراحة، مستودعات ذخيرة وطعام ومياه، بطاريات طاقة، خطوط اتصال سلكية، وأنابيب تهوية مدمجة في أساسات المباني السكنية العلوية لتشتيت البصمة الحرارية.</li>
+                                <li><strong>المستوى الثالث (المخابئ الاستراتيجية العميقة على عمق 40 إلى 70 متراً):</strong> وهي محفورة تحت طبقات الطين والصخور الرملية، ومزودة بـ <strong>أبواب فولاذية مضادة للانفجارات (Blast Doors)</strong> ومنعطفات بزاوية 90 درجة (Zig-Zag). هذه المنعطفات الهندسية مصممة فيزيائياً لامتصاص وتشتيت موجة الضغط الجوي الناتجة عن قنابل (GBU-28 وMK-84) الأمريكية الخارقة للتحصينات التي تزن 2,000 رطل؛ فحتى لو اخترقت القنبلة الأرض وانفجرت في بداية النفق، فإن الأبواب الفولاذية والمنعطفات تمنع موجة الانفجار من قتل من هم على بعد 50 متراً داخل النفق.</li>
+                            </ul>
+
+                            <h4>ثالثاً: معركة "المسافة صفر" — المبارزة التكنولوجية بين منظومة "تروفي" وقذيفة "الياسين 105"</h4>
+                            <p>على سطح الأرض، دارت واحدة من أعقد المعارك التكتيكية في حروب المدن الحديثة بين سلاح المدرعات الإسرائيلي (دبابات <strong>ميركافا 4</strong> وناقلات الجند المدرعة الثقيلة <strong>نمر Namer</strong> وجرافات <strong>D9</strong> المصفحة) وبين خلايا المشاة الصغيرة (المكونة من 2 إلى 3 مقاتلين فقط).</p>
+                            <p>تمتلك دبابة الميركافا 4 درعاً إلكترونياً متطوراً جداً يُسمى <strong>منظومة الحماية النشطة "تروفي" (Trophy APS - معطف الريح)</strong>. كيف تعمل هذه المنظومة؟ تحتوي الدبابة على 4 رادارات صغيرة تغطي 360 درجة حولها؛ عندما يطلق مقاتل قذيفة RPG نحو الدبابة، يرصد الرادار القذيفة وهي في الهواء، ويحسب سرعتها وزاويتها في أجزاء من الألف من الثانية، ثم يطلق دفعة من الكرات المعدنية المتفجرة لتفجير القذيفة في الهواء قبل أن تلمس جسم الدبابة!</p>
+                            <p><strong>كيف تعامل مقاتلو القسام مع هذه التكنولوجيا في أزقة غزة؟</strong> عبر ثلاثة تكتيكات ميدانية وعلمية:</p>
+                            <ul>
+                                <li><strong>1. استغلال "النقطة العمياء الزمنية" (قانون المسافة صفر):</strong> يحتاج رادار منظومة "تروفي" وجهاز الإطلاق الميكانيكي الخاص به إلى زمن رد فعل يقدر بحوالي 300 إلى 400 ملي ثانية لرصد القذيفة واعتراضها. وبما أن سرعة قذيفة الـ RPG تقارب 300 متر في الثانية، فهذا يعني أنه إذا تم إطلاق القذيفة من مسافة تقل عن <strong>30 إلى 50 متراً</strong> (وهي المسافة المعتادة بين الركام والمباني في أزقة مخيم جباليا أو الشجاعية أو خان يونس)، فإن القذيفة تصطدم بالدبابة قبل أن يتمكن كمبيوتر التروفي من إتمام عملية الاعتراض!</li>
+                                <li><strong>2. الرأس الحربي الترادفي المزدوج في قذيفة "الياسين 105":</strong> قذيفة الياسين 105 هي نسخة مطورة محلياً عن قذيفة (PG-7VR) السوفيتية، وتتميز بوجود <strong>حشوتين جوفاوين متتاليتين (Tandem Warhead)</strong>؛ الحشوة الأمامية الصغيرة (عيار 64 ملم) تنفجر أولاً لتدمير "الدروع التفاعلية" الخارجية للدبابة، وبعدها بأجزاء من الثانية تخترق الحشوة الرئيسية الكبرى (عيار 105 ملم) الفولاذ الأساسي للدبابة بعمق يصل إلى 600 ملم من الحديد المصمت.</li>
+                                <li><strong>3. عبوة "العمل الفدائي" (العبوات اللاصقة):</strong> في الحالات التي يتعذر فيها الرماية، كان المقاتل يخرج من فتحة نفق وسط دخان القصف والركام ويركض مباشرة لوضع عبوة "شواظ" شديدة الانفجار يدوياً فوق نقطة التقاء البرج ببدن الدبابة أو على فتحات التهوية الخلفية، حيث لا تستطيع رادارات التروفي رصد إنسان يركض بسرعة منخفضة لأنه مصمم لرصد المقذوفات السريعة فقط.</li>
+                            </ul>
+
+                            <h4>رابعاً: الذكاء الاصطناعي في اختيار الأهداف — منظومات "لافندر" و"البشارة" (Habsora)</h4>
+                            <p>على الجانب الإسرائيلي، شهدت حرب غزة الاستخدام الأوسع في التاريخ العسكري لخوارزميات <strong>الذكاء الاصطناعي وتعلم الآلة (AI Target Generation)</strong> في الحروب الجوية. في الحروب السابقة، كان فريق كامل من ضباط المخابرات البشرية يستغرق أسابيع لجمع المعلومات وتحديد 50 هدفاً عسكرياً في غزة.</p>
+                            <p>أما في هذه الحرب، فاعتمد الجيش الإسرائيلي على منظومتين للذكاء الاصطناعي هما: <strong>"هابسورا" (البشارة - للبنك المعماري والأنفاق)</strong> ومنظومة <strong>"لافندر" (Lavender - لتحديد الأفراد)</strong>. تقوم منظومة "لافندر" بمسح بيانات الملايين من سكان غزة (سجلات الاتصالات، مجموعات الواتساب، تغيير الهواتف المتكرر، نمط الحركة الجغرافية، والصور الجوية)، ثم تعطي لكل شخص تقييماً رقمياً من 1 إلى 100 حول احتمالية انتمائه للجناح العسكري لحماس أو الجهاد، وتولّد قوائم تضم عشرات الآلاف من الأهداف البشرية والمنازل المرتبطة بها في أيام معدودة، وهو ما يفسر الكثافة غير المسبوقة للغارات الجوية التي دمرت أحياء سكنية كاملة في الأسابيع الأولى للحرب بهدف تدمير البنية الحاضنة فوق الأنفاق وتحتها.</p>
+                        `
+                    },
+                    {
+                        number: 3,
+                        title: 'الفصل الثالث: توسيع الدائرة الإقليمية — تفجيرات البيجر في لبنان والمواجهة الصاروخية الإيرانية المباشرة',
+                        readingTime: '19 دقيقة قراءة معمقة',
+                        summary: 'كيف اخترقت المخابرات الإسرائيلية سلاسل التوريد لتفجير آلاف أجهزة "البيجر" واللاسلكي؟ وكيف دارت أكبر معركة دفاع جوي خارج الغلاف الجوي بين إيران وإسرائيل؟',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_3_launch.jpg/800px-Arrow_3_launch.jpg',
+                                caption: 'لحظة إطلاق صاروخ "حيتس 3" (Arrow 3) المصمم لاعتراض الصواريخ الباليستية بعيدة المدى في الفضاء خارج الغلاف الجوي للأرض.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'وثائقي استخباراتي: كيف نُفذت عملية تفجير أجهزة البيجر في لبنان؟', url: 'https://www.youtube.com/results?search_query=كيف+تمت+عملية+تفجير+البيجر+لبنان' },
+                            { title: 'تحليل عسكري: الصواريخ الباليستية الإيرانية في مواجهة منظومة حيتس 3 وثاد', url: 'https://www.youtube.com/results?search_query=الصواريخ+الايرانية+ضد+منظومة+حيتس' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: جبهة الشمال وحرب "سلاسل التوريد" — عملية تفجير أجهزة البيجر واللاسلكي (سبتمبر 2024)</h4>
+                            <p>منذ يوم 8 أكتوبر 2023، فتح "حزب الله" في جنوب لبنان ما أسماه "جبهة الإسناد المشاغلة"، عبر استهداف المواقع والرادارات الإسرائيلية على طول الحدود بصواريخ الكورنيت الموجهة والبركان والمسيرات، مما أجبر إسرائيل على إخلاء أكثر من 60,000 مستوطن من مستوطنات الجليل الأعلى. وطوال 11 شهراً، التزم الطرفان بما عُرف بـ "قواعد الاشتباك المحسوبة"، إلى أن قررت إسرائيل في سبتمبر 2024 الانتقال إلى استراتيجية <strong>"التصعيد من أجل الحسم وشل القيادة"</strong>.</p>
+                            <p>في يومي 17 و18 سبتمبر 2024، شهد العالم عملية استخباراتية غير مسبوقة في تاريخ الحروب السرية ستُدرّس طويلاً تحت عنوان <strong>"اختراق وتلغيم سلاسل التوريد" (Supply Chain Interdiction)</strong>. كيف تمت العملية؟</p>
+                            <ul>
+                                <li>في مطلع عام 2024، أمر الأمين العام لحزب الله (حسن نصر الله) كوادر الحزب بالتخلي عن الهواتف الذكية لأن المخابرات الإسرائيلية تستخدمها لتتبع واغتيال القادة الميدانيين، وقرر الحزب العودة إلى أجهزة النداء الآلي القديمة أحادية الاتجاه <strong>(Pagers - بيجر)</strong> وأجهزة اللاسلكي (Walkie-Talkies) لأنها لا تحتوي على GPS ولا كاميرات ولا تتصل بالإنترنت.</li>
+                                <li>كانت المخابرات الإسرائيلية (الموساد والوحدة 8200) قد توقعت هذه الخطوة مسبقاً، فأسست <strong>شركات واجهة وهمية في أوروبا</strong> (منها شركة مسجلة في المجر باسم BAC Consulting)، وحصلت على ترخيص لتصنيع أجهزة بيجر تحمل العلامة التجارية لشركة (Gold Apollo) التايوانية.</li>
+                                <li>داخل خطوط الإنتاج السرية، تم حقن بطاريات الليثيوم الخاصة بآلاف أجهزة البيجر بكميات دقيقة (من 3 إلى 6 غرامات) من مادة <strong>"رباعي نترات خماسي الإريثريتول" (PETN)</strong> شديدة الانفجار، بطريقة تجعل اكتشافها بأجهزة الأشعة السينية العادية في المطارات والجمارك مستحيلاً لأنها مدمجة داخل خلايا البطارية نفسها.</li>
+                                <li>في الساعة 3:30 من بعد ظهر يوم 17 سبتمبر 2024، أرسلت المخابرات الإسرائيلية شفرة إلكترونية موحدة لجميع الأجهزة في لبنان في لحظة واحدة، بدت وكأنها رسالة رسمية من قيادة الحزب تتطلب الضغط على زرين لقراءتها. وعندما حمل آلاف الكوادر الأجهزة أمام وجوههم وأيديهم، انفجرت أكثر من 3,000 بطارية في ثانية واحدة، وتلاها في اليوم التالي تفجير أجهزة اللاسلكي (Icom)، مما أدى إلى إخراج آلاف المقاتلين والكوادر من الخدمة وإحداث شلل كامل في شبكة الاتصالات العسكرية للحزب.</li>
+                                <li>استغل سلاح الجو الإسرائيلي هذا الشلل الاتصالي الفوري، فشن خلال أسبوعين موجة غارات عنيفة استهدفت قيادة "قوة الرضوان" في الضاحية الجنوبية لبيروت، وانتهت في 27 سبتمبر 2024 باغتيال الأمين العام للحزب حسن نصر الله عبر إلقاء أكثر من 80 طناً من القنابل الخارقة للتحصينات المتتابعة على المقر المركزي تحت الأرض في حارة حريك.</li>
+                            </ul>
+
+                            <h4>ثانياً: كسر المحرمات الجيوسياسية — المواجهة الصاروخية المباشرة بين إيران وإسرائيل (أبريل وأكتوبر 2024)</h4>
+                            <p>لعقود طويلة، دار الصراع بين إيران وإسرائيل فيما يُسمى بـ <strong>"المنطقة الرمادية أو حرب الظل"</strong> (عمليات اغتيال لعلماء نوويين، هجمات سيبرانية مثل فيروس ستوكسنت، وضربات ضد حلفاء إيران في سوريا والمنطقة) دون أن تطلق إيران صاروخاً واحداً من أراضيها مباشرة نحو الأراضي الإسرائيلية. لكن هذا الخط الأحمر انكسر مرتين في عام 2024:</p>
+                            <ul>
+                                <li><strong>1. هجوم أبريل 2024 (الوعد الصادق 1):</strong> جاء رداً على قصف القنصلية الإيرانية في دمشق. أطلقت إيران أكثر من 300 مقذوف (شملت 170 مسيرة بطيئة من طراز شاهد-136 استغرقت 7 ساعات في الطيران، و30 صاروخ كروز، و120 صاروخاً باليستياً). أعطى بطء المسيرات وقتاً كافياً لتحالف دولي تقوده الولايات المتحدة وبريطانيا وفرنسا وإسرائيل لاعتراض الغالبية العظمى من المقذوفات خارج الحدود.</li>
+                                <li><strong>2. هجوم أكتوبر 2024 (الوعد الصادق 2 — التكتيك الباليستي الصافي):</strong> تعلمت القوة الجوفضائية للحرس الثوري الإيراني من درس أبريل، فاستغنت تماماً عن المسيرات البطيئة التي تكشف الهجوم مبكراً، وأطلقت في الأول من أكتوبر ما بين <strong>180 إلى 200 صاروخ باليستي متوسط المدى</strong> (من طراز عماد، قدر، خيبر شكن، وفتاح الفرط صوتي) دفعة واحدة؛ حيث لا يستغرق الصاروخ الباليستي سوى <strong>12 دقيقة فقط</strong> لقطع مسافة الـ 1,500 كيلومتر من غرب إيران إلى القواعد الجوية الإسرائيلية (مثل قاعدة نيفاتيم وتل نوف).</li>
+                            </ul>
+
+                            <h4>ثالثاً: تشريح شبكة الدفاع الجوي الإسرائيلية الطبقية ومعضلة "اقتصاديات الاعتراض"</h4>
+                            <p>كشفت الهجمات الصاروخية الإيرانية عن أول معركة حقيقية في التاريخ تدور في <strong>الفضاء الخارجي (خارج الغلاف الجوي للأرض - Exo-atmospheric Interception)</strong>. تتكون شبكة الدفاع الجوي الإسرائيلية من أربع طبقات متدرجة:</p>
+                            <ul>
+                                <li><strong>الطبقة الأولى (القبة الحديدية Iron Dome):</strong> مخصصة فقط للصواريخ التكتيكية القصيرة المدى وقذائف الهاون والمسيرات (مدى من 4 إلى 70 كم)، ولا تستطيع إطلاقاً التعامل مع الصواريخ الباليستية الضخمة القادمة من إيران أو اليمن.</li>
+                                <li><strong>الطبقة الثانية (مقلاع داوود David's Sling):</strong> مخصصة للصواريخ الثقيلة متوسطة المدى وصواريخ الكروز (مدى حتى 300 كم).</li>
+                                <li><strong>الطبقة الثالثة والرابعة (حيتس 2 وحيتس 3 - Arrow 2 & 3، ومنظومة THAAD الأمريكية):</strong> وهي المنظومات الاستراتيجية التي تتصدى للصواريخ الباليستية القادمة من إيران واليمن. صاروخ "حيتس 3" ينطلق إلى الفضاء على ارتفاع يتجاوز 100 كيلومتر ليصطدم بالرأس الحربي للصاروخ الإيراني بسرعة هائلة (Hit-to-Kill) قبل دخوله الغلاف الجوي.</li>
+                            </ul>
+                            <p><strong>أين تكمن المعضلة الاستراتيجية لإسرائيل وحلفائها في هذه المعادلة؟</strong> تكمن في أمرين: <strong>"الإغراق الكمي" و"التكلفة المالية وخطوط الإنتاج"</strong>. تكلفة تصنيع صاروخ باليستي إيراني تتراوح بين 100 ألف إلى 300 ألف دولار، بينما تبلغ تكلفة صاروخ الاعتراض الواحد من طراز (حيتس 3) أو (ثاد) ما بين <strong>2.5 إلى 3.5 مليون دولار!</strong> والأخطر من المال هو أن المصانع الأمريكية والإسرائيلية تنتج بضع مئات فقط من صواريخ الاعتراض الفضائية سنوياً، مما يعني أن أي حرب استنزاف صاروخية طويلة الأمد تهدد باستنفاد مخزون الصواريخ الاعتراضية. لذلك، جاء الرد الجوي الإسرائيلي على إيران في 26 أكتوبر 2024 مركزاً بدقة على هدفين استراتيجيين: تدمير رادارات منظومات (S-300) التي تحمي الأجواء الإيرانية، وتدمير <strong>"الخلاطات الكوكبية الصناعية" (Planetary Mixers)</strong> التي تُستخدم في خلط الوقود الصلب للصواريخ الباليستية الإيرانية لشل قدرة طهران على الإنتاج السريع.</p>
+                        `
+                    },
+                    {
+                        number: 4,
+                        title: 'الفصل الرابع: جبهة البحر الأحمر وباب المندب — كيف شلت المسيرات البحرية والجوية أعصاب التجارة العالمية؟',
+                        readingTime: '18 دقيقة قراءة معمقة',
+                        summary: 'لماذا فشل تحالف "حارس الازدهار" وحاملات الطائرات الأمريكية في وقف هجمات الحوثيين في البحر الأحمر؟ اقتصاديات المضايق البحرية وتأثيرها على قناة السويس وأوروبا.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bab_el-Mandeb_map.png/800px-Bab_el-Mandeb_map.png',
+                                caption: 'خريطة توضح مضيق باب المندب الاستراتيجي الذي لا يتجاوز عرضه 30 كيلومتراً ويفصل بين اليمن في آسيا وجيبوتي وإريتريا في القرن الأفريقي.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحليل جيوسياسي واقتصادي: أزمة البحر الأحمر وباب المندب وتأثيرها على التجارة العالمية', url: 'https://www.youtube.com/results?search_query=أزمة+البحر+الأحمر+باب+المندب+التجارة+العالمية' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: الجغرافيا الحاكمة — لماذا يُعد مضيق "باب المندب" عنق الزجاجة للاقتصاد العالمي؟</h4>
+                            <p>في الجغرافيا السياسية البحرية (Naval Geopolitics)، توجد في العالم 7 مضايق وممرات مائية حاكمة تُسمى <strong>"نقاط الاختناق الاستراتيجية" (Chokepoints)</strong>. يأتي في مقدمتها الممر الممتد من <strong>مضيق باب المندب</strong> جنوباً وصولاً إلى <strong>قناة السويس</strong> شمالاً عبر البحر الأحمر.</p>
+                            <p>يبلغ عرض مضيق باب المندب في أضيق نقاطه حوالي <strong>29 كيلومتراً فقط</strong>، وتقسمه جزيرة "ميون" (بريم) اليمنية إلى قناتين ملاحيتين، بحيث لا يتجاوز عرض الممر الذي تعبر فيه ناقلات النفط العملاقة وسفن الحاويات بضعة كيلومترات قبالة السواحل والجبال اليمنية مباشرة. في الظروف الطبيعية، يمر عبر هذا الشريان الضيق سنوياً:</p>
+                            <ul>
+                                <li>أكثر من <strong>12% إلى 15% من إجمالي التجارة العالمية</strong> المنقولة بحراً.</li>
+                                <li>حوالي <strong>30% من حركة سفن الحاويات في العالم</strong> (التي تنقل السلع المصنعة والإلكترونيات والملابس من الصين وشرق آسيا إلى الأسواق الأوروبية).</li>
+                                <li>نحو 8 إلى 10 ملايين برميل من النفط الخام والمشتقات البترولية والغاز الطبيعي المسال يومياً.</li>
+                            </ul>
+
+                            <h4>ثانياً: تطور الترسانة الحوثية — أول استخدام قتالي في التاريخ لـ "الصواريخ الباليستية المضادة للسفن"</h4>
+                            <p>بدءاً من نوفمبر 2023 (مع عملية احتجاز سفينة Galaxy Leader بواسطة مروحية عسكرية)، دخلت جماعة "أنصار الله" (الحوثيون) في اليمن على خط الحرب معلنة فرض حصار بحري على السفن المرتبطة بإسرائيل، ثم وسعت الاستهداف ليشمل السفن الأمريكية والبريطانية بعد بدء الغارات المشتركة على اليمن.</p>
+                            <p>المفاجأة العسكرية التي واجهتها البحرية الأمريكية في البحر الأحمر هي أن الحوثيين لم يستخدموا قوارب سريعة مسلحة برشاشات كما يفعل القراصنة التقليديون، بل استخدموا <strong>منظومة تحريم بحري (A2/AD) غير متماثلة</strong> تتكون من أربعة أسلحة رئيسية مطورة بتكنولوجيا إيرانية:</p>
+                            <ul>
+                                <li><strong>1. الصواريخ الباليستية المضادة للسفن المتحركة (ASBM):</strong> لأول مرة في التاريخ البحري العسكري، تُستخدم صواريخ باليستية (مثل "عاصف" و"تنكيل" و"محيط" المبنية على صاروخ فاتح-110 الإيراني والمزودة ببواحث كهروضوئية ورادارية في رأسها) لضرب سفن تجارية وعسكرية تتحرك في عرض البحر. خطورة الصاروخ الباليستي أنه ينقض من الغلاف الجوي العلوي بسرعة تفوق سرعة الصوت بـ 3 إلى 4 مرات، مما لا يترك للمدمرات الحربية سوى ثوانٍ معدودة للتصدي له.</li>
+                                <li><strong>2. صواريخ الكروز البحرية المجنحة (مثل قدس والمندب-2):</strong> وهي صواريخ تطير على ارتفاع منخفض جداً فوق سطح أمواج البحر (Sea-Skimming) لتفادي رادارات السفن الحربية.</li>
+                                <li><strong>3. الزوارق المسيرة الانتحارية (USVs - مثل "طوفان"):</strong> وهي قوارب سريعة ملغمة بـ 500 كجم من المتفجرات ويتم توجيهها عن بُعد أو بالتحكم الآلي لتصطدم بجانب السفينة تحت خط الماء وتغرقها (كما حدث مع السفينة Tutor).</li>
+                                <li><strong>4. المسيرات الجوية الانتحارية (صماد-3 وشاهد-136):</strong> التي تُطلق بأسراب لإشغال واستنزاف رادارات المدمرات الغربية.</li>
+                            </ul>
+
+                            <h4>ثالثاً: لماذا عجزت حاملات الطائرات الأمريكية وتحالف "حارس الازدهار" عن إنهاء التهديد؟</h4>
+                            <p>أرسلت الولايات المتحدة أقوى مجموعات حاملات الطائرات لديها (مثل حاملة الطائرات <strong>أيزنهاور USS Dwight D. Eisenhower</strong> والمدمرات المزودة بنظام Aegis الدفاعي)، وشكلت تحالف "حارس الازدهار" وشنت مئات الغارات الجوية على صنعاء والحديدة وتعز. ومع ذلك، استمرت الهجمات في البحر الأحمر. لماذا؟</p>
+                            <ul>
+                                <li><strong>مشكلة المنصات المتحركة والطبيعة الجبلية لليمن:</strong> لا يمتلك الحوثيون قواعد جوية ثابتة أو مصانع ضخمة فوق الأرض يمكن تدميرها فتنتهي قدراتهم؛ بل يتم إخفاء الصواريخ والمسيرات داخل كهوف جبلية صخرية طبيعية في صعدة وصنعاء وعمران (صمدت سابقاً أمام 8 سنوات من القصف الجوي الكثيف)، وتُحمل الصواريخ على شاحنات مدنية عادية تخرج لإطلاق الصاروخ في 10 دقائق ثم تختفي قبل وصول الطائرات المقاتلة.</li>
+                                <li><strong>الاستنزاف الاقتصادي للبحرية الأمريكية:</strong> لإسقاط طائرة مسيرة حوثية لا تتجاوز تكلفتها <strong>2,000 إلى 20,000 دولار</strong>، تضطر المدمرة الأمريكية لإطلاق صاروخ اعتراضي من طراز (SM-2) تبلغ تكلفته <strong>2.1 مليون دولار</strong>، أو صاروخ (SM-6) بتكلفة <strong>4.3 مليون دولار</strong>! لقد أنفقت البحرية الأمريكية في أشهر قليلة أكثر من مليار دولار من الذخائر البحرية المتطورة في معركة استنزاف غير متكافئة اقتصادياً.</li>
+                            </ul>
+
+                            <h4>رابعاً: الزلزال الاقتصادي البحري — الدوران حول "رأس الرجاء الصالح" وتداعياته</h4>
+                            <p>لم تكن غاية الهجمات في البحر الأحمر هي إغراق جميع السفن، بل كانت الغاية الاستراتيجية هي <strong>"رفع تكلفة التأمين البحري إلى مستوى يجبر شركات الشحن العالمية على مقاطعة الممر"</strong>. وقد نجح هذا التكتيك اقتصادياً؛ فبمجرد أن ارتفعت أقساط التأمين ضد مخاطر الحرب من 0.05% إلى نحو 1% من إجمالي قيمة السفينة، قررت عمالقة الشحن البحري في العالم (Maersk، Hapag-Lloyd، MSC، وCMA CGM) تحويل مسار سفنها بعيداً عن البحر الأحمر وقناة السويس للدوران حول قارة أفريقيا بالكامل عبر <strong>"رأس الرجاء الصالح"</strong>.</p>
+                            <p>ترتب على هذا التحول الجغرافي أربع نتائج اقتصادية كبرى:</p>
+                            <ul>
+                                <li>زيادة مسافة الرحلة البحرية بين آسيا وأوروبا بنحو <strong>6,500 كيلومتر إضافية</strong>، مما أضاف ما بين <strong>10 إلى 14 يوماً</strong> لزمن كل رحلة ذهاباً وإياباً.</li>
+                                <li>ارتفاع تكلفة الوقود والشحن للحاوية الواحدة (40 قدماً) من 1,500 دولار إلى ما بين 4,000 و6,000 دولار، مما أعاد الضغوط التضخمية على سلاسل الإمداد الأوروبية.</li>
+                                <li>شلل تام في <strong>ميناء إيلات</strong> الإسرائيلي على البحر الأحمر بعد انخفاض نشاطه بنسبة تجاوزت 85%.</li>
+                                <li>تضرر إقليمي بالغ للاقتصاد المصري نتيجة تراجع عائدات <strong>قناة السويس</strong> الدولارية بنسبة قاربت 50% إلى 60% (خسارة تُقدر بنحو 5 إلى 6 مليارات دولار سنوياً) بسبب عزوف السفن الكبرى عن عبور الممر الملاحي للبحر الأحمر.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+
+            sudan: {
+                id: 'sudan',
+                title: 'حرب السودان المنسية: صراع الجنرالات، إمبراطورية الذهب، وحرب الإمدادات',
+                subtitle: 'كيف تحول صراع السلطة بين الجيش السوداني وقوات الدعم السريع إلى حرب مدن مدمرة في الخرطوم ودارفور والجزيرة، ومن هي القوى الإقليمية والدولية التي تحرك خيوط الذهب والموانئ؟',
+                region: 'شرق أفريقيا / وادي النيل والبحر الأحمر',
+                startDate: '15 أبريل 2023 - مستمرة',
+                coverImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Khartoum_spot_satellite_image.jpg/1024px-Khartoum_spot_satellite_image.jpg',
+                metrics: [
+                    { label: 'حجم النزوح واللجوء القسري', value: 'أكثر من 11 مليون سوداني (الأكبر عالمياً)' },
+                    { label: 'إنتاج الذهب السوداني (المحرك المالي للحرب)', value: 'أكثر من 80 طناً سنوياً (معظمه مهرب)' },
+                    { label: 'طول ساحل السودان الاستراتيجي على البحر الأحمر', value: 'حوالي 750 كيلومتراً' },
+                    { label: 'مساحة الأراضي الزراعية الصالحة في السودان', value: 'أكثر من 175 مليون فدان' }
+                ],
+                chapters: [
+                    {
+                        number: 1,
+                        title: 'الفصل الأول: جذور الوحش الموازي — كيف صُنعت "قوات الدعم السريع" ولماذا انفجرت الخرطوم؟',
+                        readingTime: '19 دقيقة قراءة معمقة',
+                        summary: 'القصة الكاملة من مليشيات "الجنجويد" في دارفور 2003، إلى "استراتيجية الحماية من الانقلاب" التي اتبعها البشير، وصولاً إلى خلاف دمج الجيش في أبريل 2023.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sudan_regions_map.svg/800px-Sudan_regions_map.svg.png',
+                                caption: 'خريطة أقاليم السودان الشاسعة وتظهر موقع إقليم دارفور في أقصى الغرب (معقل الدعم السريع) والعاصمة المثلثة الخرطوم عند التقاء النيلين.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'وثائقي: قصة صعود حميدتي وقوات الدعم السريع من دارفور إلى الخرطوم', url: 'https://www.youtube.com/results?search_query=قصة+قوات+الدعم+السريع+حميدتي+وثائقي' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: الخطيئة التأسيسية — لماذا يصنع الرؤساء "جيوشاً موازية" تبتلع دولهم لاحقاً؟</h4>
+                            <p>هناك قاعدة ثابتة في التاريخ العسكري والسياسي للدول: <strong>"لا يمكن لدولة واحدة أن تعيش برأسين عسكريين"</strong>. أي دولة تسمح بنشوء قوة عسكرية مسلحة ومستقلة في تمويلها وقيادتها خارج التسلسل الهرمي للجيش النظامي، فإنها تزرع بيدها قنبلة موقوتة ستنفجر حتماً في قلب عاصمتها عندما تتضارب المصالح. وهذا بالضبط ما حدث في السودان.</p>
+                            <p>تعود البداية إلى عام 2003، عندما اندلعت حركات تمرد مسلحة في إقليم <strong>دارفور</strong> (غرب السودان) ضد حكومة الرئيس الأسبق عمر البشير. في ذلك الوقت، كان الجيش السوداني النظامي منهكاً من حرب الجنوب الطويلة، وكان العديد من جنوده ينحدرون من أصول دارفورية، فخشي البشير من عدم ولائهم الكامل أو عجزهم عن خوض حرب عصابات في صحاري دارفور الوعرة.</p>
+                            <p>هنا لجأ نظام البشير إلى حل رخيص وسريع وشديد الخطورة: تسليح وتمويل مليشيات قبلية عربية رعوية في دارفور عُرفت محلياً وإعلامياً باسم <strong>"الجنجويد"</strong>، ومنحها تفويضاً مطلقاً لسحق التمرد. برز من بين قادة هذه المليشيات شاب طموح من قبيلة "الرزيقات" (فرع الماهرية) لم يتلقَ تعليماً عسكرياً أكاديمياً، وكان يعمل في تجارة الإبل وحماية القوافل، اسمه <strong>محمد حمدان دقلو (المعروف بـ "حميدتي")</strong>.</p>
+
+                            <h4>ثانياً: تقنين الوحش (2013 - 2017) — لعبة "الحماية من الانقلاب" (Coup-Proofing)</h4>
+                            <p>بدلاً من حل هذه المليشيات بعد هدوء المعارك الكبرى في دارفور، اتخذ عمر البشير في عام 2013 قراراً تاريخياً بتحويلها رسمياً إلى قوة نظامية تحت اسم <strong>"قوات الدعم السريع" (RSF)</strong>، وجعلها تتبع له شخصياً كرئيس للجمهورية بالتنسيق مع جهاز الأمن والمخابرات، ثم أصدر البرلمان السوداني في عام 2017 قانوناً يمنحها استقلالية واسعة.</p>
+                            <p><strong>لماذا فعل البشير ذلك رغم تحذيرات قادة الجيش؟</strong> لأن البشير، الذي جاء هو نفسه إلى الحكم عبر انقلاب عسكري عام 1989، كان مهووساً بخوفه من أن ينقلب عليه جنرالات الجيش السوداني أو قيادات الحركة الإسلامية. لذلك اتبع ما يسميه علماء السياسة <strong>"توازن الرعب المؤسسي" (Coup-Proofing)</strong>: وضع الجيش النظامي في كفة، ووضع قوات الدعم السريع وجهاز الأمن في الكفة المقابلة داخل العاصمة الخرطوم، بحيث يحرس كل طرف البشير من الطرف الآخر، وأطلق البشير على حميدتي لقب <strong>"حمايتي"</strong> (أي الشخص الذي يحميني)!</p>
+
+                            <h4>ثالثاً: من الإطاحة بالبشير (2019) إلى انقلاب أكتوبر (2021) — تحالف الضرورة المؤقت</h4>
+                            <p>في ديسمبر 2018 وأبريل 2019، خرج ملايين السودانيين في ثورة شعبية كبرى أطاحت بنظام عمر البشير. وفي لحظة الحسم، تحالف قائد الجيش <strong>الفريق أول عبد الفتاح البرهان</strong> مع قائد الدعم السريع <strong>حميدتي</strong> لعزل البشير وتشكيل المجلس العسكري الانتقالي، حيث أصبح البرهان رئيساً للمجلس السيادي وحميدتي نائباً له.</p>
+                            <p>طوال الفترة من 2019 إلى 2021، تقاسم الرجلان السلطة في مواجهة القوى المدنية (قوى الحرية والتغيير). وعندما اقترب موعد تسليم رئاسة المجلس السيادي للمدنيين وبدأت الحكومة المدنية برئاسة عبد الله حمدوك تفتح ملفات الشركات الاقتصادية التابعة للجيش والدعم السريع، اتحد البرهان وحميدتي مجدداً في <strong>25 أكتوبر 2021</strong> ونفذا انقلاباً عسكرياً أطاح بالحكومة المدنية. لكن بمجرد خروج المدنيين من المعادلة، بقي الجنرالان وجهاً لوجه على كرسي واحد لا يتسع لاثنين!</p>
+
+                            <h4>رابعاً: الشرارة التي فجرت الحرب في 15 أبريل 2023 — عقدة "الدمج والجدول الزمني"</h4>
+                            <p>في أواخر عام 2022 ومطلع 2023، وتحت ضغط دولي وإقليمي شديد، تم توقيع ما عُرف بـ <strong>"الاتفاق الإطاري"</strong> لإعادة السلطة للمدنيين. وكان البند الأخطر والأكثر حساسية في هذا الاتفاق هو: <strong>"دمج قوات الدعم السريع داخل الجيش السوداني النظامي لتكوين جيش قومي واحد"</strong>. وهنا انفجر الخلاف الجذري على ثلاث نقاط:</p>
+                            <ul>
+                                <li><strong>الجدول الزمني للدمج:</strong> أصر الجيش السوداني والبرهان على أن يتم دمج قوات الدعم السريع بالكامل خلال <strong>سنتين فقط</strong>، بينما أصر حميدتي على أن يستغرق الدمج <strong>10 سنوات كاملة</strong> (وهو ما يعني عملياً بقاء الدعم السريع كجيش مستقل لعقد كامل).</li>
+                                <li><strong>القيادة والرتب العسكرية:</strong> من يقود الجيش الموحد خلال فترة الدمج؟ وهل سيقبل ضباط الجيش خريجو الكلية الحربية بأن يتساوى معهم في الرتب قادة ميدانيون في الدعم السريع حصلوا على رتبهم بقرارات سياسية دون دراسة عسكرية؟</li>
+                                <li><strong>التحرك الميداني نحو مطار مروي والخرطوم:</strong> في الأيام الأولى من أبريل 2023، دفعت قوات الدعم السريع بمئات العربات المسلحة لمحاصرة <strong>قاعدة ومطار مروي الجوي</strong> شمال السودان، وانتشرت حول مقر القيادة العامة والإذاعة والقصر الجمهوري في قلب الخرطوم. وفي صباح يوم السبت <strong>15 أبريل 2023</strong>، انطلقت الرصاصة الأولى في معركة "كسر عظم" للسيطرة على العاصمة.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: 2,
+                        title: 'الفصل الثاني: التكتيكات العسكرية في معركة الخرطوم — حرب الشوارع الخفيفة في مواجهة سلاح الجو والمدرعات',
+                        readingTime: '20 دقيقة قراءة معمقة',
+                        summary: 'لماذا فشل الجيش السوداني في طرد الدعم السريع من الخرطوم في الأشهر الأولى؟ تشريح تكتيك "عربات التاتشر" السريعة، حصار القواعد العسكرية، وحرب الجسور فوق النيل.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Khartoum_spot_satellite_image.jpg/800px-Khartoum_spot_satellite_image.jpg',
+                                caption: 'صورة فضائية توضح التقاء النيلين الأبيض والأزرق في العاصمة المثلثة (الخرطوم، أم درمان، والخرطوم بحري) والجسور العشرة الحاكمة للمعركة.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Technical_vehicle_in_Somalia.jpg/800px-Technical_vehicle_in_Somalia.jpg',
+                                caption: 'نموذج لعربات الدفع الرباعي الخفيفة المسلحة برشاشات ثقيلة (المعروفة في السودان باسم عربات التاتشر) والتي تشكل العمود الفقري لتكتيكات قوات الدعم السريع.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحليل عسكري: كيف تُدار معارك الشوارع والمدن في الخرطوم بين الجيش والدعم السريع؟', url: 'https://www.youtube.com/results?search_query=تحليل+عسكري+معركة+الخرطوم+الجيش+والدعم+السريع' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: الجغرافيا العسكرية للعاصمة المثلثة (الخرطوم، أم درمان، الخرطوم بحري)</h4>
+                            <p>تتميز العاصمة السودانية بجغرافيا فريدة تجعل القتال فيها كابوساً لأي مخطط عسكري؛ فهي ليست مدينة واحدة، بل هي <strong>"عاصمة مثلثة"</strong> يفصل بين أجزائها الثلاثة التقاء <strong>النيل الأزرق بالنيل الأبيض</strong> ليشكلا نهر النيل العظيم:</p>
+                            <ul>
+                                <li><strong>الخرطوم (المركز الإداري والسياسي):</strong> تقع بين النيلين، وتضم القصر الجمهوري، القيادة العامة للجيش، مطار الخرطوم الدولي، وسلاح المدرعات في منطقة "الشجرة".</li>
+                                <li><strong>أم درمان (الضفة الغربية للنيل):</strong> هي العاصمة التاريخية وأكبر تجمع سكاني، وتضم قاعدة "وادي سيدنا" الجوية الاستراتيجية، وسلاح المهندسين، ومبنى الإذاعة والتلفزيون، وتعتبر البوابة الغربية المفتوحة على طريق إمدادات دارفور وكردفان.</li>
+                                <li><strong>الخرطوم بحري (الضفة الشمالية الشرقية):</strong> تضم المنطقة الصناعية ومصفاة "الجيلي" لتكرير النفط (أكبر مصفاة في البلاد) وسلاح الإشارة.</li>
+                            </ul>
+                            <p>ترتبط هذه المدن الثلاث ببعضها عبر <strong>10 جسور رئيسية فوق النيل</strong> (مثل جسر شمبات، جسر الحلفايا، جسر المك نمر، وجسر الفتيحاب). وبالتالي، فإن من يسيطر على هذه الجسور العشرة يتحكم في شرايين الحركة والإمداد والخنق العسكري داخل العاصمة.</p>
+
+                            <h4>ثانياً: خطأ التموضع القاتل قبل الحرب — العدو كان داخل الغرف المحصنة بالفعل!</h4>
+                            <p>في الحروب التقليدية، يهاجم العدو العاصمة من أطرافها الخارجية فيتصدى له الجيش على أسوار المدينة. أما في الخرطوم، فقد ورث الجيش السوداني وضعاً كارثياً من عهد البشير والفترة الانتقالية: <strong>كانت قوات الدعم السريع تمتلك عشرات المقرات والمعسكرات الرسمية في قلب الأحياء السكنية الراقية وبجوار الوزارات والقيادة العامة ومطار الخرطوم!</strong></p>
+                            <p>في صباح 15 أبريل 2023، كان لدى الدعم السريع قرابة <strong>30,000 إلى 40,000 مقاتل</strong> متمركزين بالفعل داخل الخرطوم. اعتمدت خطة حميدتي في الساعات الأولى على تنفيذ "ضربة قاضية خاطفة" من خلال:</p>
+                            <ul>
+                                <li><strong>1.</strong> مهاجمة بيت الضيافة ومقر إقامة قائد الجيش عبد الفتاح البرهان داخل القيادة العامة لقتله أو أسره في الساعة الأولى (وهي العملية التي نجا منها البرهان بصعوبة بعد قتال متلاحم للحرس الرئاسي).</li>
+                                <li><strong>2.</strong> اقتحام مطار الخرطوم الدولي وقاعدة مروي الجوية لتدمير الطائرات على الأرض وشل سلاح الجو السوداني منذ اللحظة الأولى.</li>
+                                <li><strong>3.</strong> السيطرة على القصر الجمهوري ومبنى الإذاعة والتلفزيون لإعلان بيان السيطرة على الحكم.</li>
+                            </ul>
+
+                            <h4>ثالثاً: معادلة القوة غير المتماثلة — "عربات التاتشر" الخفيفة مقابل الدبابات والطيران</h4>
+                            <p>عندما فشلت الضربة الخاطفة في قتل قيادة الجيش، تحولت الخرطوم إلى ساحة حرب مدن ضروس كشفت عن التناقض التكتيكي بين القوتين:</p>
+                            <ul>
+                                <li><strong>نقاط قوة الدعم السريع (السرعة وحرب الشوارع والتمترس المدني):</strong> لا يمتلك الدعم السريع طائرات مقاتلة، ولا يعتمد على دبابات ثقيلة بطيئة الحركة؛ بل يعتمد عقيدته القتالية على آلاف عربات الدفع الرباعي الخفيفة والسريعة (Toyota Land Cruiser Pickups) التي يطلق عليها السودانيون اسم <strong>"التاتشر"</strong>، والمسلحة برشاشات (دوشكا 12.7 ملم) ومدافع مضادة للطائرات (ثنائي ورباعي 14.5 ملم و23 ملم) وصواريخ كورنيت. هذه العربات تتميز بمرونة فائقة في المناورة داخل الأزقة والشوارع الفرعية، والاضرب والهرب. والأهم من ذلك أن مقاتلي الدعم السريع انتشروا داخل <strong>منازل المواطنين والمستشفيات والجامعات</strong>، واتخذوا من الأحياء السكنية دروعاً ومقرات إقامة، مما جعل قصفهم بالطيران أمراً شديد التعقيد.</li>
+                                <li><strong>نقاط قوة الجيش السوداني (القواعد الحصينة، سلاح الجو، والمسيرات):</strong> على الرغم من محاصرة قوات الجيش داخل مقراته الكبرى (القيادة العامة، سلاح المدرعات في الشجرة، وسلاح المهندسين والذخيرة) لأشهر طويلة، إلا أن الجيش احتفظ بـ <strong>قاعدة وادي سيدنا الجوية</strong> شمال أم درمان، ومن خلالها فرض سيطرة جوية بمقاتلات (ميغ-29 وسوخوي-25) لضرب أرتال الإمداد القادمة من دارفور وتدمير جسر "شمبات" الاستراتيجي لقطع شريان الدعم السريع بين أم درمان وبحري.</li>
+                            </ul>
+
+                            <h4>رابعاً: التحول التكتيكي في 2024-2025 — دخول المسيرات الحديثة واستعادة أم درمان والخرطوم</h4>
+                            <p>في النصف الأول من الحرب، كانت الغلبة الميدانية في شوارع الخرطوم والجزيرة ودارفور تميل لصالح قوات الدعم السريع بفضل خفة حركتها وخطوط إمدادها الخارجية. لكن اعتباراً من عام 2024 ومطلع 2025، نجح الجيش السوداني في تعديل الكفة العسكرية عبر ثلاثة متغيرات:</p>
+                            <ul>
+                                <li><strong>دخول المسيرات الاستراتيجية (مهاجر-6 الإيرانية وبيرقدار وأكينجي):</strong> حصل الجيش السوداني على طائرات مسيرة مسلحة متطورة مزودة بكاميرات حرارية وقنابل ذكية دقيقة التوجيه. على عكس طائرات الميغ القديمة التي تطير بسرعة عالية وتخطئ أهدافها في الشوارع الضيقة، تستطيع المسيرة التحليق فوق حي سكني لساعات طويلة، ورصد عربة التاتشر أو مخزن الذخيرة بدقة تحت الأشجار وتدميره بقنبلة صغيرة.</li>
+                                <li><strong>حرب المسيرات المضادة:</strong> في المقابل، حصلت قوات الدعم السريع على طائرات مسيرة انتحارية بعيدة المدى ومنظومات تشويش وصواريخ دفاع جوي محمولة، واستخدمتها لمهاجمة المطارات والقواعد العسكرية حتى في مدينة "بورتسودان" (العاصمة الإدارية البديلة على البحر الأحمر) وعطبرة وشندي.</li>
+                                <li><strong>تكتيك القضم التدريجي والعبور:</strong> اعتمد الجيش وحلفاؤه من "كتائب المستنفرين" و"القوة المشتركة لحركات دارفور" على قتال المشاة من منزل إلى منزل لاستعادة أحياء أم درمان القديمة ومقر الإذاعة، ثم استعادة مدينة ود مدني بولاية الجزيرة وفك الحصار عن القيادة العامة بالخرطوم.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: 3,
+                        title: 'الفصل الثالث: اقتصاد الحرب الدموي — إمبراطورية ذهب "جبل عامر"، سقوط ولاية الجزيرة، وشبكات التهريب',
+                        readingTime: '18 دقيقة قراءة معمقة',
+                        summary: 'من أين يمول طرفا الصراع حرباً تكلف ملايين الدولارات يومياً في بلد منهار اقتصادياً؟ قصة شركة "الجنيد"، مناجم الذهب، وكارثة سقوط "سلة غذاء السودان".',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Gold_bullion_bars.jpg/800px-Gold_bullion_bars.jpg',
+                                caption: 'سبائك الذهب التي تشكل الوقود المالي الأول للحرب؛ حيث ينتج السودان أكثر من 80 طناً من الذهب سنوياً يتم تهريب معظمها لتمويل السلاح.'
+                            },
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gezira_Scheme_from_space.jpg/800px-Gezira_Scheme_from_space.jpg',
+                                caption: 'صورة فضائية لمشروع الجزيرة الزراعي بين النيلين الأبيض والأزرق؛ أكبر مشروع مروي في أفريقيا وسلة غذاء السودان.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحقيق استقصائي: ذهب السودان.. كيف يمول المعدن الأصفر حرب الجنرالات؟', url: 'https://www.youtube.com/results?search_query=ذهب+السودان+تمويل+الحرب+جبل+عامر' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: لغز التمويل — كيف تستمر حرب حديثة في دولة مفلسة؟</h4>
+                            <p>الحروب الحديثة باهظة التكلفة؛ كل يوم قتال في السودان يستهلك آلاف اللترات من الوقود، وملايين الطلقات والقذائف الصاروخية، والمسيرات، ورواتب لعشرات الآلاف من المقاتلين والمرتزقة العابرين للحدود. ومع تدمير المصانع والبنوك ومصفاة الخرطوم وتوقف الصادرات الرسمية، يبرز السؤال الاستراتيجي الأهم: <strong>من أين يأتي المال لشراء كل هذا السلاح؟</strong></p>
+                            <p>الإجابة تتلخص في كلمة واحدة: <strong>الذهب</strong>. بعد انفصال جنوب السودان عام 2011 وفقدان الخرطوم لـ 75% من آبار النفط، تحول الذهب إلى الشريان الاقتصادي الأول للسودان، حيث يمتلك السودان احتياطيات هائلة وينتج ما بين <strong>80 إلى 100 طن من الذهب سنوياً</strong>، مما يجعله ثالث أكبر منتج للذهب في القارة الأفريقية بعد غانا وجنوب أفريقيا. ولكن الكارثة هي أن أكثر من <strong>70% إلى 80% من هذا الذهب لا يدخل خزينة البنك المركزي السوداني</strong>، بل يتم تهريبه عبر شبكات عابرة للحدود لتمويل الآلة العسكرية.</p>
+
+                            <h4>ثانياً: إمبراطورية "جبل عامر" وشركة "الجنيد" — الخزينة الخاصة لقوات الدعم السريع</h4>
+                            <p>سر القوة المالية الهائلة التي جعلت "حميدتي" يتحول من قائد مليشيا محلية في دارفور إلى واحد من أغنى وأقوى رجال السودان يعود إلى عام 2012، عندما اكتُشفت عروق غنية جداً بالذهب السطحي في منطقة <strong>"جبل عامر"</strong> بشمال دارفور.</p>
+                            <ul>
+                                <li>في عام 2017، سيطرت قوات الدعم السريع عسكرياً بشكل كامل على مناجم جبل عامر ومناجم أخرى في جنوب دارفور وكردفان، وطردت المنافسين المحليين.</li>
+                                <li>أسست عائلة دقلو (بإدارة عبد الرحيم دقلو وشقيقه القوني دقلو) تكتلاً تجارياً ومالياً ضخماً على رأسه <strong>شركة "الجنيد" للأنشطة المتعددة</strong>، وشركة "تراديف"، وبنك الخليج.</li>
+                                <li>كانت هذه الشبكة تستخرج أطنان الذهب من دارفور، وتقوم بتصفيته ونقله جواً عبر مطارات محلية أو براً عبر تشاد وليبيا وأفريقيا الوسطى إلى الأسواق الإقليمية والخارجية، وتودع عائداته المقدرة بـ <strong>مليارات الدولارات في حسابات مصرفية وشركات واجهة خارج السودان</strong>.</li>
+                                <li>هذا الاستقلال المالي التام عن وزارة المالية السودانية هو الذي منح الدعم السريع القدرة على دفع رواتب مجزية بالدولار والعملة الصعبة لاستقطاب مقاتلين ومرتزقة من قبائل الساحل الأفريقي (تشاد، النيجر، مالي، وأفريقيا الوسطى)، وشراء شحنات السلاح والوقود طوال سنوات الحرب دون الحاجة لميزانية الدولة.</li>
+                            </ul>
+
+                            <h4>ثالثاً: المقابل الاقتصادي للجيش السوداني — مناطق التعدين الشمالية، الموانئ، والمنظومة الدفاعية</h4>
+                            <p>في المقابل، يعتمد الجيش السوداني والحكومة المتمركزة في "بورتسودان" في تمويل مجهودها الحربي على ثلاثة موارد اقتصادية رئيسية تقع في المناطق الآمنة نسبياً تحت سيطرة الجيش في شمال وشرق السودان:</p>
+                            <ul>
+                                <li><strong>1. مناجم الذهب في ولايتي نهر النيل والبحر الأحمر والشمالية:</strong> وهي مناطق غنية جداً بالتعدين الأهلي والشركات المنظمة بعيداً عن سيطرة الدعم السريع، وقد كثفت حكومة بورتسودان صادراتها من هذا الذهب لتوفير النقد الأجنبي لشراء الطائرات المسيرة والذخائر والوقود.</li>
+                                <li><strong>2. عائدات ميناء بورتسودان والجمارك ورسوم عبور نفط جنوب السودان:</strong> يظل ميناء بورتسودان على البحر الأحمر هو البوابة البحرية الوحيدة للبلاد، مما يمنح الجيش السيطرة على التجارة الخارجية الرسمية والمساعدات الدولية.</li>
+                                <li><strong>3. منظومة الصناعات الدفاعية وشركات الجيش:</strong> يمتلك الجيش السوداني تاريخياً إمبراطورية اقتصادية ضخمة تشمل مصانع السلاح والذخيرة، وشركات المقاولات، وتصدير الصمغ العربي، والسمسم، والماشية الحية لدول الخليج ومصر.</li>
+                            </ul>
+
+                            <h4>رابعاً: معركة ولاية الجزيرة — تدمير "سلة غذاء السودان" واقتصاد النهب</h4>
+                            <p>عندما امتدت المعارك إلى <strong>ولاية الجزيرة (وعاصمتها ود مدني)</strong> في أواخر 2023 قبل أن يستعيدها الجيش في مطلع 2025، حدثت كارثة إنسانية واقتصادية غير مسبوقة لسببين استراتيجيين:</p>
+                            <ul>
+                                <li><strong>ضرب الأمن الغذائي القومي في مقتل:</strong> تضم الولاية <strong>"مشروع الجزيرة الزراعي"</strong>، وهو واحد من أكبر المشاريع المروية في العالم بمساحة تزيد عن 2.2 مليون فدان تقع بين النيلين الأزرق والأبيض، وينتج أكثر من نصف احتياجات السودان من القمح والذرة والقطن. نهب مخازن البذور والأسمدة والجرارات الزراعية وتهجير المزارعين أدى إلى توقف الدورة الزراعية، ووضع أكثر من <strong>25 مليون سوداني على حافة المجاعة الحادة</strong>.</li>
+                                <li><strong>"اقتصاد الغنائم والنهب الذاتي" (Self-Sustaining Looting Economy):</strong> مع إطالة أمد الحرب، تحولت العمليات الميدانية إلى ما يُعرف عسكرياً بـ "التمويل الذاتي عبر الغنيمة"؛ حيث يُسمح للمقاتلين بنهب السيارات الخاصة، ومدخرات المواطنين من الذهب والأموال، ومخازن التجار والمصانع كتعويض ومكافأة عن القتال، مما حول الحرب من صراع سياسي بين جنرالين إلى حرب نهب وتطهير ديموغرافي شامل.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        number: 4,
+                        title: 'الفصل الرابع: رقعة الشطرنج الإقليمية والدولية — صراع المحاور حول البحر الأحمر ووادي النيل',
+                        readingTime: '19 دقيقة قراءة معمقة',
+                        summary: 'لماذا يتدخل العالم في حرب السودان؟ شرح حسابات الأمن القومي المصري، خطوط الإمداد عبر ليبيا وتشاد وأفريقيا الوسطى، وصراع الموانئ بين روسيا وإيران والخليج والغرب.',
+                        archivalPhotos: [
+                            {
+                                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Port_Sudan_harbour.jpg/800px-Port_Sudan_harbour.jpg',
+                                caption: 'ميناء بورتسودان الاستراتيجي على البحر الأحمر، الذي تحول إلى العاصمة الإدارية المؤقتة للسودان ومركز التنافس الجيوسياسي بين القوى الكبرى.'
+                            }
+                        ],
+                        videoLinks: [
+                            { title: 'تحليل جيوسياسي: من يدعم من في حرب السودان؟ صراع القوى الإقليمية والدولية', url: 'https://www.youtube.com/results?search_query=صراع+القوى+الإقليمية+في+حرب+السودان' }
+                        ],
+                        fullText: `
+                            <h4>أولاً: لماذا لا يُترك السودان وشأنه؟ — الأهمية الجيوسياسية الفائقة للسودان</h4>
+                            <p>قد يتساءل القارئ: لماذا تتقاطع مصالح عشرات الدول الإقليمية والعظمى في بلد فقير ومنهك مثل السودان؟ عندما تنظر أجهزة المخابرات العالمية إلى موقع السودان، فإنها ترى ثلاث جوائز استراتيجية كبرى لا تقدر بثمن:</p>
+                            <ul>
+                                <li><strong>ساحل بطول 750 كيلومتراً على البحر الأحمر:</strong> يقع السودان في منتصف الممر المائي الأهم في العالم بين قناة السويس شمالاً ومضيق باب المندب جنوباً، ومقابل السواحل السعودية مباشرة (مدينة جدة). أي قوة عظمى تمتلك قاعدة بحرية في "بورتسودان" أو "سواكن" تستطيع مراقبة وقطع شريان النفط والتجارة بين الشرق والغرب.</li>
+                                <li><strong>عقدة مياه نهر النيل وسد النهضة:</strong> يجري في السودان النيل الأزرق (القادم من إثيوبيا حيث يقع سد النهضة) والنيل الأبيض، ويلتقيان في الخرطوم ليتجها شمالاً نحو مصر.</li>
+                                <li><strong>الجسر الرابط بين العالم العربي والقرن الأفريقي ومنطقة الساحل والصحراء:</strong> يشترك السودان في حدود برية مفتوحة مع 7 دول (مصر، ليبيا، تشاد، أفريقيا الوسطى، جنوب السودان، إثيوبيا، وإريتريا)، مما يجعله صمام الأمان أو بؤرة التفجير لنصف القارة الأفريقية.</li>
+                            </ul>
+
+                            <h4>ثانياً: حسابات الأمن القومي المصري — "عقيدة بقاء الدولة المركزية ووحدة الجيش"</h4>
+                            <p>بالنسبة لمصر، لا تُعد حرب السودان أزمة خارجية، بل هي <strong>قضية أمن قومي داخلي من الدرجة الأولى</strong>؛ فالسودان هو العمق الاستراتيجي الجنوبي المباشر لمصر عبر حدود برية تمتد لأكثر من 1,270 كيلومتراً. ترتكز الرؤية الاستراتيجية المصرية في الأزمة السودانية على ثلاثة ثوابت حاسمة:</p>
+                            <ul>
+                                <li><strong>1. رفض سقوط مؤسسات الدولة الشرعية والجيش القومي:</strong> ترى القاهرة أن انتصار مليشيا قبلية غير نظامية (قوات الدعم السريع) على الجيش السوداني النظامي سيؤدي حتماً إلى تفكيك السودان إلى دويلات ومليشيات متناحرة على غرار النموذج الليبي والصومالي على الحدود الجنوبية لمصر.</li>
+                                <li><strong>2. أزمة اللاجئين والضغط الديموغرافي:</strong> استقبلت مصر منذ اندلاع الحرب أكثر من 1.2 مليون وافد سوداني جديد انضموا لملايين المقيمين سابقاً، وهو ما يفرض ضغطاً اقتصادياً وخدمياً هائلاً.</li>
+                                <li><strong>3. ملف مياه النيل والحدود المشتركة:</strong> تحتاج مصر إلى حكومة مركزية مستقرة ومتحالفة في الخرطوم لتنسيق المواقف الجيوسياسية والمائية تجاه السدود الإثيوبية على النيل الأزرق، وتأمين ساحل البحر الأحمر.</li>
+                            </ul>
+
+                            <h4>ثالثاً: خريطة خطوط الإمداد العابرة للحدود — كيف يصل السلاح والوقود إلى دارفور والخرطوم؟</h4>
+                            <p>بما أن الجيش السوداني يسيطر على الأجواء والموانئ الرسمية على البحر الأحمر، كيف استطاعت قوات الدعم السريع الحصول على تدفق مستمر من الصواريخ الحرارية، والمدفعية، والمسيرات، والوقود طوال الحرب؟</p>
+                            <p>كشفت تقارير لجنة خبراء الأمم المتحدة والصحافة الاستقصائية العالمية عن شبكة لوجستية معقدة تطوق السودان من الغرب والجنوب والشرق:</p>
+                            <ul>
+                                <li><strong>الممر التشادي (مطار أم جرس في شرق تشاد):</strong> تحول مطار "أم جرس" القريب من الحدود مع إقليم دارفور إلى جسر جوي رئيسي تهبط فيه طائرات الشحن من طراز (إليوشن Il-76) محملة بالمعدات العسكرية والإمدادات، ثم تنقلها الشاحنات براً عبر مدينة "أدري" الحدودية إلى مدينة "الجنينة" و"نيالا" في دارفور (التي تسيطر عليها قوات الدعم السريع).</li>
+                                <li><strong>الممر الليبي الجنوبي (الكفرة):</strong> عبر الصحراء الكبرى، تتدفق شاحنات الوقود المهرب والذخائر من مناطق جنوب شرق ليبيا عبر المثلث الحدودي وصولاً إلى شمال دارفور وشمال كردفان.</li>
+                                <li><strong>ممر أفريقيا الوسطى وجنوب السودان:</strong> استخدمت الشبكات المرتبطة بقوات فاغنر الروسية سابقاً ومهربو الذهب مسارات برية وجوية عبر جمهورية أفريقيا الوسطى لتزويد الدعم السريع بالسلاح مقابل سبائك الذهب المستخرجة من دارفور.</li>
+                            </ul>
+
+                            <h4>رابعاً: تحول التحالفات الكبرى — عودة إيران للبحر الأحمر ومناورة روسيا المزدوجة</h4>
+                            <p>شهد عام 2024 انقلاباً دراماتيكياً في التحالفات الخارجية للجيش السوداني في بورتسودان، بعد أن شعر قادة الجيش بأن الغرب وبعض القوى الإقليمية يضغطون عليهم سياسياً:</p>
+                            <ul>
+                                <li><strong>عودة العلاقات السودانية الإيرانية:</strong> بعد قطيعة دامت 8 سنوات (منذ عام 2016)، أعادت حكومة بورتسودان العلاقات الدبلوماسية والعسكرية الكاملة مع طهران. زودت إيران الجيش السوداني فوراً بطائرات <strong>"مهاجر-6" وأبابيل</strong> المسيرة وتقنيات الحرب الإلكترونية التي قلبت موازين القتال في أم درمان والخرطوم، مقابل سعي إيران للحصول على موطئ قدم استراتيجي وتسهيلات بحرية على ساحل البحر الأحمر السوداني.</li>
+                                <li><strong>الانقلاب الميكافيللي الروسي (من فاغنر إلى بورتسودان):</strong> في بداية الحرب عام 2023، كانت قوات "فاغنر" الروسية تدعم حميدتي وقوات الدعم السريع بالسلاح وصواريخ السام-7 مقابل حصتها في ذهب دارفور. لكن بعد مقتل قائد فاغنر (يفغيني بريغوجين) وسيطرة وزارة الدفاع الروسية على الملف الأفريقي في 2024، غيرت موسكو بوصلتها نحو <strong>الجيش السوداني في بورتسودان</strong>! لماذا؟ لأن الجيش السوداني هو الذي يسيطر على ساحل البحر الأحمر، وقد عرض على روسيا تفعيل الاتفاقية القديمة لإنشاء <strong>"مركز لوجستي وقاعدة بحرية للأسطول الروسي في بورتسودان"</strong> تضم 300 عسكري روسي و4 سفن حربية مقابل تزويد الجيش السوداني بالوقود والسلاح والفيتو الدبلوماسي في مجلس الأمن الدولي.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            }
+        };
+
+        function renderHomeCards(filterText = '') {
+            const container = document.getElementById('conflictCardsContainer');
+            const quickGrid = document.getElementById('allChaptersQuickGrid');
+            container.innerHTML = '';
+            quickGrid.innerHTML = '';
+
+            Object.values(CONFLICTS_DATA).forEach(conflict => {
+                if (filterText) {
+                    const matchTitle = conflict.title.includes(filterText) || conflict.subtitle.includes(filterText);
+                    const matchChapters = conflict.chapters.some(ch => ch.title.includes(filterText) || ch.fullText.includes(filterText));
+                    if (!matchTitle && !matchChapters) return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'bg-zinc-900 border border-zinc-800 hover:border-red-600/80 rounded-2xl overflow-hidden flex flex-col justify-between transition duration-300 shadow-xl group cursor-pointer';
+                card.onclick = () => openConflict(conflict.id, 0);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-zinc-950 visual-element ${textOnlyMode ? 'hidden' : ''}">
+                            <img src="${conflict.coverImg}" alt="${conflict.title}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80"
+                                 onerror="this.parentElement.style.display='none'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/30 to-transparent"></div>
+                            <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                ${conflict.chapters.length} فصول موسوعية كاملة
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-red-400 font-bold mb-2">${conflict.region} • ${conflict.startDate}</div>
+                            <h3 class="text-xl font-black text-white mb-3 group-hover:text-red-500 transition leading-snug">${conflict.title}</h3>
+                            <p class="text-sm text-zinc-400 leading-relaxed mb-5">${conflict.subtitle}</p>
+                            <div class="space-y-2 border-t border-zinc-800 pt-4">
+                                <div class="text-xs font-bold text-zinc-300 mb-2">اضغط على أي فصل لفتحه مباشرة:</div>
+                                ${conflict.chapters.map((ch, idx) => `
+                                    <div onclick="event.stopPropagation(); openConflict('${conflict.id}', ${idx})" 
+                                         class="text-xs text-zinc-300 hover:text-white bg-zinc-950/80 hover:bg-red-950/40 border border-zinc-800/80 hover:border-red-600/50 p-2 rounded-lg flex items-center justify-between gap-2 transition">
+                                        <span class="truncate"><strong class="text-red-500 ml-1">0${ch.number}.</strong>${ch.title}</span>
+                                        <span class="text-[11px] text-red-400 font-bold shrink-0">اقرأ ←</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl text-sm shadow-lg transition">
+                            افتح الملف واقرأ الفصول بالتفصيل ←
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+
+                // Populate quick access 12 chapters grid
+                conflict.chapters.forEach((ch, idx) => {
+                    const qCard = document.createElement('div');
+                    qCard.onclick = () => openConflict(conflict.id, idx);
+                    qCard.className = 'bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-red-600 rounded-xl p-4 cursor-pointer transition flex flex-col justify-between group';
+                    qCard.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between text-[11px] mb-2">
+                                <span class="text-red-400 font-black">${conflict.title.split(':')[0]}</span>
+                                <span class="text-zinc-400">⏱ ${ch.readingTime}</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-red-400 transition leading-snug mb-2">${ch.title}</h4>
+                            <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed">${ch.summary}</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs font-bold text-red-400">
+                            <span>فصل موسوعي كامل</span>
+                            <span>فتح الفصل ←</span>
+                        </div>
+                    `;
+                    quickGrid.appendChild(qCard);
+                });
+            });
+        }
+
+        function openConflict(conflictId, chapterIdx = 0) {
+            currentConflictId = conflictId;
+            currentChapterIndex = chapterIdx;
+
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('readerView').classList.remove('hidden');
+
+            const conflict = CONFLICTS_DATA[conflictId];
+
+            // Render Conflict Header
+            document.getElementById('conflictHeader').innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-4xl">
+                        <div class="inline-flex items-center gap-2 text-xs font-bold text-red-400 bg-red-950/50 border border-red-800/50 px-3 py-1 rounded-full">
+                            <span>${conflict.region}</span>
+                            <span>•</span>
+                            <span>${conflict.startDate}</span>
+                        </div>
+                        <h1 class="text-2xl md:text-4xl font-black text-white leading-tight">${conflict.title}</h1>
+                        <p class="text-zinc-300 text-sm md:text-base leading-relaxed">${conflict.subtitle}</p>
+                    </div>
+                </div>
+            `;
+
+            // Render Quick Metrics
+            document.getElementById('conflictMetricsBox').innerHTML = `
+                <h4 class="text-sm font-black text-zinc-200 border-b border-zinc-800 pb-2">📊 مؤشرات وأرقام حاكمة في هذا الصراع</h4>
+                <div class="space-y-3 pt-1">
+                    ${conflict.metrics.map(m => `
+                        <div class="bg-zinc-950/70 p-3 rounded-lg border border-zinc-800/80">
+                            <div class="text-xs text-zinc-400">${m.label}</div>
+                            <div class="text-sm font-black text-red-400 mt-0.5">${m.value}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            renderChaptersSidebar();
+            renderActiveChapter();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderChaptersSidebar() {
+            const conflict = CONFLICTS_DATA[currentConflictId];
+            const listEl = document.getElementById('chaptersList');
+            listEl.innerHTML = '';
+
+            conflict.chapters.forEach((ch, idx) => {
+                const isActive = idx === currentChapterIndex;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-right p-4 rounded-xl border transition flex flex-col gap-1.5 ${
+                    isActive ? 'chapter-active border-red-600 shadow-lg' : 'bg-zinc-950/60 border-zinc-800 hover:border-zinc-600'
+                }`;
+                btn.onclick = () => {
+                    currentChapterIndex = idx;
+                    renderChaptersSidebar();
+                    renderActiveChapter();
+                    document.getElementById('chapterContentArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+
+                btn.innerHTML = `
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="font-black ${isActive ? 'text-red-400' : 'text-zinc-400'}">${isActive ? '▶ قيد القراءة الآن: الفصل 0' + ch.number : 'الفصل 0' + ch.number}</span>
+                        <span class="text-[11px] text-zinc-400">⏱ ${ch.readingTime}</span>
+                    </div>
+                    <div class="font-bold text-sm text-white leading-snug">${ch.title}</div>
+                    <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed">${ch.summary}</p>
+                `;
+                listEl.appendChild(btn);
+            });
+        }
+
+        function renderActiveChapter() {
+            const conflict = CONFLICTS_DATA[currentConflictId];
+            const ch = conflict.chapters[currentChapterIndex];
+            const contentArea = document.getElementById('chapterContentArea');
+
+            const archivalGalleryHtml = (ch.archivalPhotos && ch.archivalPhotos.length > 0) ? `
+                <div class="my-8 space-y-4 visual-element ${textOnlyMode ? 'hidden' : ''}">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-2">
+                        <h4 class="text-sm font-bold text-zinc-300">📷 خرائط وصور أرشيفية موثقة من المصادر المفتوحة</h4>
+                        <button onclick="toggleTextOnlyMode()" class="text-xs text-zinc-400 hover:text-red-400 underline">إخفاء الصور والتركيز على النص فقط</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${ch.archivalPhotos.map(photo => `
+                            <figure class="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden flex flex-col justify-between">
+                                <img src="${photo.url}" alt="${photo.caption}" 
+                                     class="w-full h-56 object-cover bg-zinc-900"
+                                     onerror="this.closest('figure').style.display='none'">
+                                <figcaption class="p-3.5 text-xs text-zinc-300 leading-relaxed border-t border-zinc-800/80">
+                                    ${photo.caption}
+                                </figcaption>
+                            </figure>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            const videoLinksHtml = (ch.videoLinks && ch.videoLinks.length > 0) ? `
+                <div class="mt-10 pt-6 border-t border-zinc-800">
+                    <h4 class="text-base font-black text-white mb-3">🎬 وثائقيات ومصادر مرئية خارجية للاستزادة حول هذا الفصل:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${ch.videoLinks.map(v => `
+                            <a href="${v.url}" target="_blank" rel="noopener noreferrer" 
+                               class="flex items-center justify-between p-4 rounded-xl bg-zinc-950 hover:bg-red-950/30 border border-zinc-800 hover:border-red-600/50 transition group">
+                                <span class="text-sm font-bold text-zinc-200 group-hover:text-white">${v.title}</span>
+                                <span class="text-red-500 font-black text-xs mr-2 shrink-0">مشاهدة على يوتيوب ↗</span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            // Next / Prev Chapter Navigation
+            const hasPrev = currentChapterIndex > 0;
+            const hasNext = currentChapterIndex < conflict.chapters.length - 1;
+
+            contentArea.innerHTML = `
+                <div class="border-b border-zinc-800 pb-6 mb-6">
+                    <div class="flex flex-wrap items-center gap-3 text-xs font-bold text-red-500 mb-2">
+                        <span class="bg-red-600/15 border border-red-600/30 px-3 py-1 rounded-full">الفصل ${ch.number} من ${conflict.chapters.length}</span>
+                        <span class="text-zinc-400">⏱ ${ch.readingTime}</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white leading-snug mb-3">${ch.title}</h2>
+                    <p class="text-zinc-400 text-sm md:text-base bg-zinc-950/80 p-4 rounded-xl border border-zinc-800 leading-relaxed">
+                        <strong class="text-zinc-200">ملخص الفصل:</strong> ${ch.summary}
+                    </p>
+                </div>
+
+                ${archivalGalleryHtml}
+
+                <div id="articleBodyText" class="prose-strategic" style="font-size: ${currentFontSize}px;">
+                    ${ch.fullText}
+                </div>
+
+                ${videoLinksHtml}
+
+                <!-- Bottom Chapter Navigation -->
+                <div class="mt-10 pt-6 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-4">
+                    ${hasPrev ? `
+                        <button onclick="openConflict('${currentConflictId}', ${currentChapterIndex - 1})" 
+                                class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-5 py-3 rounded-xl text-sm transition">
+                            → الفصل السابق: ${conflict.chapters[currentChapterIndex - 1].title.substring(0, 35)}...
+                        </button>
+                    ` : '<div></div>'}
+
+                    ${hasNext ? `
+                        <button onclick="openConflict('${currentConflictId}', ${currentChapterIndex + 1})" 
+                                class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-lg shadow-red-600/25 transition">
+                            انتقل إلى الفصل التالي (${conflict.chapters[currentChapterIndex + 1].number}) ←
+                        </button>
+                    ` : `
+                        <button onclick="showHome()" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition">
+                            ✓ أتممت قراءة هذا الملف بالكامل — العودة للرئيسية
+                        </button>
+                    `}
+                </div>
+            `;
+        }
+
+        function showHome() {
+            document.getElementById('readerView').classList.add('hidden');
+            document.getElementById('homeView').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function adjustFontSize(delta) {
+            currentFontSize = Math.min(24, Math.max(14, currentFontSize + delta));
+            const bodyEl = document.getElementById('articleBodyText');
+            if (bodyEl) {
+                bodyEl.style.fontSize = currentFontSize + 'px';
+            }
+        }
+
+        function toggleTextOnlyMode() {
+            textOnlyMode = !textOnlyMode;
+            const btn = document.getElementById('visualToggleBtn');
+            btn.textContent = textOnlyMode ? 'إظهار الصور الأرشيفية' : 'وضع القراءة الصافي (إخفاء الصور)';
+            btn.className = textOnlyMode 
+                ? 'text-xs bg-red-600 text-white px-3.5 py-1.5 rounded-full font-bold transition'
+                : 'text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-3.5 py-1.5 rounded-full border border-zinc-700 font-bold transition';
+
+            document.querySelectorAll('.visual-element').forEach(el => {
+                if (textOnlyMode) {
+                    el.classList.add('hidden');
+                } else {
+                    el.classList.remove('hidden');
+                }
+            });
+        }
+
+        function toggleGlossary() {
+            const modal = document.getElementById('glossaryModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function handleSearch(query) {
+            const q = query.trim();
+            if (!document.getElementById('readerView').classList.contains('hidden') && q.length > 1) {
+                showHome();
+            }
+            renderHomeCards(q);
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderHomeCards();
+        });
+    </script>
+</body>
+</html>
