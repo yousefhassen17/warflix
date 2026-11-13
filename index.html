@@ -1268,6 +1268,44 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderHomeCards();
         });
+        async function loadAutonomousUpdates() {
+    try {
+        const res = await fetch('./updates.json?t=' + new Date().getTime());
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data.live_briefings || data.live_briefings.length === 0) return;
+
+        data.live_briefings.forEach((item) => {
+            const name = item.conflict_name || '';
+            let targetKey = 'ukraine';
+            if (name.includes('غزة') || name.includes('فلسطين') || name.includes('إسرائيل') || name.includes('لبنان') || name.includes('إيران') || name.includes('اليمن') || name.includes('شرق')) {
+                targetKey = 'gaza';
+            } else if (name.includes('سودان') || name.includes('خرطوم') || name.includes('دارفور')) {
+                targetKey = 'sudan';
+            }
+
+            const targetConflict = CONFLICTS_DATA[targetKey];
+            const exists = targetConflict.chapters.some(ch => ch.title.includes(item.chapter_title));
+            if (!exists) {
+                targetConflict.chapters.push({
+                    number: targetConflict.chapters.length + 1,
+                    title: `🔴 [تحديث آلي - ${item.date}] ${item.chapter_title}`,
+                    readingTime: item.reading_time || '10 دقائق قراءة',
+                    summary: item.summary,
+                    archivalPhotos: [],
+                    videoLinks: [],
+                    fullText: item.full_html_analysis
+                });
+            }
+        });
+
+        renderHomeCards();
+    } catch (e) {
+        console.log('No live updates yet:', e);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', loadAutonomousUpdates);
     </script>
 </body>
 </html>
